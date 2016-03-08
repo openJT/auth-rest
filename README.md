@@ -2,7 +2,7 @@
 
 A REST API demo, Node.js with authentication(Passport), MongoDB collections, Mongoose Schemas, AngularJS and vanilla JavaScript front ends.
 
-Live demo at: https://www.openjt.com/rest-x-fronts  
+Live demo at: https://auth-rest.openjt.com/  
 
 To use the demo:  
 
