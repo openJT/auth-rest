@@ -1,0 +1,32 @@
+<md-dialog flex-sm="100" flex-md="80" flex-lg="80" flex-gt-lg="40">
+    <md-content>
+        <form name="form" layout="column" class="dialog">
+            <div ng-show="!ctrl.edit" style="padding:10px">Add client</div>
+            <div ng-show="ctrl.edit" style="padding:10px">Edit client</div>
+            <md-divider></md-divider>
+            <div style="padding: 10px">
+                <md-input-container>
+                    <label>Name</label>
+                    <input ng-model="ctrl.client.lastName">
+                </md-input-container>
+                <md-input-container style="">
+                    <label>First name</label>
+                    <input ng-model="ctrl.client.firstName">
+                </md-input-container>
+                <md-input-container>
+                    <label>Company</label>
+                    <input ng-model="ctrl.client.company">
+                </md-input-container>
+                <md-input-container>
+                    <label>Position</label>
+                    <input ng-model="ctrl.client.position">
+                </md-input-container>
+            </div>
+            <md-divider></md-divider>
+            <div layout="row" layout-align="end end">
+                <md-button ng-click="ctrl.cancel()">Cancel</md-button>
+                <md-button ng-click="ctrl.save()" ng-disabled="!form.$dirty">Save</md-button>
+            </div>
+        </form>
+    </md-content>
+</md-dialog>

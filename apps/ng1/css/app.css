@@ -1,0 +1,15 @@
+html body {
+    height: 100%;
+    background-color: #C8C8C8;
+    overflow: hidden;
+    margin: 0;
+}
+.over:hover{
+     background-color: #C8C8C8;
+}
+.noselect{
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}

@@ -1,0 +1,47 @@
+<div layout="column">
+    <div layout="row" layout-align="end">
+        <md-button class="md-fab md-warn" ng-click="ctrl.reset()">
+            <md-icon md-svg-icon="material-icons/ic_refresh_48px.svg" aria-label="Add client">
+                <md-tooltip md-direction="left">Reset data</md-tooltip>
+            </md-icon>
+        </md-button>
+    </div>
+    <md-card layout="column" style="margin:20px">
+        <div layout="row" layout-align="space-between center">
+            <h2 style="margin:10px">Client management</h2>
+            <md-button ng-click="ctrl.addClient($event)" class="md-icon-button launch">
+                <md-icon md-svg-icon="material-icons/ic_add_48px.svg"></md-icon>
+                <md-tooltip md-direction="left">Add a client</md-tooltip>
+            </md-button>
+        </div>
+        <md-divider></md-divider>
+        <div layout="column" style="margin:20px">
+            <div layout="row" flex style="border:3px solid black">
+                <div flex style="padding: 5px;font-weight: 600">Name</div>
+                <div flex style="border-left:3px solid black;padding: 5px;font-weight: 600">Last name</div>
+                <div flex style="border-left:3px solid black;padding: 5px;font-weight: 600">Company</div>
+                <div flex style="border-left:3px solid black;padding: 5px;font-weight: 600">Position</div>
+                <div flex style="border-left:3px solid black;padding: 5px;font-weight: 600">Edit</div>
+                <div flex style="border-left:3px solid black;padding: 5px;font-weight: 600">Delete</div>
+            </div>
+            <div ng-repeat="client in ctrl.clients" layout="row" class="over" flex>
+                <div flex style="border:1px solid black;padding: 5px">{{client.lastName}}</div>
+                <div flex style="border:1px solid black;padding: 5px">{{client.firstName}}</div>
+                <div flex style="border:1px solid black;padding: 5px">{{client.company}}</div>
+                <div flex style="border:1px solid black;padding: 5px">{{client.position}}</div>
+                <div flex style="border:1px solid black;padding: 5px">
+                    <md-button class="md-icon-button" aria-label="Edit client" ng-click="ctrl.editClient($event,client)">
+                        <md-icon md-svg-icon="material-icons/ic_edit_24px.svg"></md-icon>
+                        <md-tooltip md-direction="right">Edit client</md-tooltip>
+                    </md-button>
+                </div>
+                <div flex style="border:1px solid black;padding: 5px">
+                    <md-button class="md-icon-button" aria-label="Delete client" ng-click="ctrl.deleteClient(client)">
+                        <md-icon md-svg-icon="material-icons/ic_delete_48px.svg"></md-icon>
+                        <md-tooltip md-direction="right">Delete client</md-tooltip>
+                    </md-button>
+                </div>
+            </div>
+        </div>
+    </md-card>
+</div>

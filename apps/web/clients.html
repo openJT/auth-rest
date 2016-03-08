@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<base href="/dashboard">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Clients</title>
+    <link rel="stylesheet" href="material-design-lite/material.min.css">
+    <link rel="stylesheet" type="text/css" href="dialog-polyfill/dialog-polyfill.css" />
+    <link rel="stylesheet" href="/css/animate.css">
+    <link rel="stylesheet" href="/web/css/app.css">
+</head>
+
+<body onload="clients.getData()">
+    <div id="toast" class="mdl-js-snackbar mdl-snackbar">
+        <div class="mdl-snackbar__text"></div>
+        <button class="mdl-snackbar__action" type="button"></button>
+    </div>
+    <div class="flex row end primary" style="height:60px">
+        <h3 style="margin:auto 30px auto 30px;color:white">Vanilla</h3>
+        <a href="/clients" class="active"><h6 style="margin:25px;color:white">Clients</h6></a>
+        <a href="/products" style="text-decoration:none;margin-right:20px"><h6 style="margin:25px;color:white">Products</h6></a>
+        <div id="exit" onclick="clients.logout()" style="margin: auto 30px auto auto;cursor: pointer">
+            <img src="/material-icons/ic_exit_to_app_white_24px.svg" alt="sorry no pic for you!" />
+        </div>
+        <div class="mdl-tooltip mdl-tooltip--left" for="exit">
+            Exit
+        </div>
+    </div>
+    <div class="flex row jEnd">
+        <div style="margin:10px">
+            <button id="reset" onclick="clients.reset()" class="mdl-button mdl-js-button mdl-button--fab" style="background-color:red">
+                <img src="/material-icons/ic_refresh_white_24px.svg" alt="sorry no pic for you!" />
+            </button>
+            <div class="mdl-tooltip mdl-tooltip--left" for="reset">
+                Reset data
+            </div>
+        </div>
+    </div>
+    <div class="flex row">
+        <div class="mdl-card mdl-shadow--6dp flex-item" style="margin:20px">
+            <div class="flex row jBetween" style="margin:5px">
+                <h4 class="flex" style="margin:auto 30px auto 30px">Client management</h4>
+                <div>
+                    <button id="addClient" onclick="clients.addClientDialog()" class="mdl-button mdl-js-button mdl-button--icon" onclick="products.addProductDialog()">
+                        <img src="/material-icons/ic_add_24px.svg" alt="sorry no pic for you!" />
+                    </button>
+                    <div class="mdl-tooltip mdl-tooltip--left" for="addClient">
+                        Add product
+                    </div>
+                </div>
+            </div>
+            <div class="mdl-card__actions mdl-card--border">
+                <div class="flex row border3">
+                    <div class="flex-item bold pad5">Name</div>
+                    <div class="flex-item borderLeft bold pad5">First name</div>
+                    <div class="flex-item borderLeft bold pad5">Company</div>
+                    <div class="flex-item borderLeft bold pad5">Position</div>
+                    <div class="flex-item borderLeft bold pad5">Edit</div>
+                    <div class="flex-item borderLeft bold pad5">Delete</div>
+                </div>
+                <div id="main" class="flex column center pad10"></div>
+            </div>
+        </div>
+        <dialog id="dialog" class="dialog">
+            <div style="border-bottom:2px solid #E1E1E1;padding:10px 0 10px 10px" id="add">Add client</div>
+            <div style="border-bottom:2px solid #E1E1E1;padding:10px 0 10px 10px" id="edit">Edit client</div>
+            <form name="laForm" action="#" style="margin:10px 10px 0 10px">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="">
+                    <input class="mdl-textfield__input" type="text" id="lastName">
+                    <label class="mdl-textfield__label" for="lastName">Name</label>
+                </div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text" id="firstName">
+                    <label class="mdl-textfield__label" for="firstName">Last name</label>
+                </div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text" id="company">
+                    <label class="mdl-textfield__label" for="company">Company</label>
+                </div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text" id="position">
+                    <label class="mdl-textfield__label" for="position">Position</label>
+                </div>
+            </form>
+             <div style="border-bottom:2px solid #E1E1E1"></div>
+            <div class="flex row jEnd">
+                <div class="item-flex">
+                    <button class="mdl-button mdl-js-button mdl-js-ripple-effect" onclick="clients.cancel()">
+                        Cancel
+                    </button>
+                    <button class="mdl-button mdl-js-button mdl-js-ripple-effect" id="addButton" onclick="clients.saveClient()">
+                        Save
+                    </button>
+                </div>
+            </div>
+        </dialog>
+
+        <script src="/web/js/clients.js"></script>
+        <script src="/web/js/auth.js"></script>
+        <script src="/web/js/products.js"></script>
+        <script src="material-design-lite/material.min.js"></script>
+</body>
+
+</html>

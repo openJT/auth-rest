@@ -1,0 +1,34 @@
+<div layout="row" layout-align="center center" style="height:100vh" class="animated fadeIn">
+    <div flex-gt-md="20" flex-md="30" flex-sm="60" flex-xs="100" style="padding: 0">
+        <md-card class="md-whiteframe-z5">
+            <md-toolbar layout="column" layout-align="space-between" style="background-color: #474747;">
+                <div style="margin: auto;text-align: center">
+                    <h3 style="margin: auto">Angular</h3></div>
+            </md-toolbar>
+            <div style="margin: 30px">
+                <form name="form" ng-submit="ctrl.login(form)" novalidate layout="column">
+                    <md-input-container>
+                        <label>Email</label>
+                        <input type="email" ng-model="ctrl.user.email">
+                    </md-input-container>
+                    <md-input-container style="padding-bottom: 0">
+                        <label>Password</label>
+                        <input type="password" ng-model="ctrl.user.password">
+                    </md-input-container>
+                    <div>
+                        <p ng-show="form.email.$error.required && form.password.$error.required && submitted">
+                            Please enter your email and password.
+                        </p>
+                        <p>{{ errors.other }}</p>
+                    </div>
+                    <md-divider></md-divider>
+                    <div layout="row" layout-align="center" class="pad">
+                        <md-button aria-label="Login" class="md-raised md-primary" type="submit" style="background-color: #474747;">
+                            Login
+                        </md-button>
+                    </div>
+                </form>
+            </div>
+        </md-card>
+    </div>
+</div>

@@ -1,0 +1,45 @@
+{
+  "name": "rest-auth",
+  "version": "1.0.0",
+  "description": "A REST API demo, Node.js with authentication, angularjs and vanilla JavaScript front ends",
+  "main": "server/app.js",
+   "scripts": {
+    "start": "node server/app.js"
+  },
+  "dependencies": {
+    "angular": "^1.5.0",
+    "angular-animate": "^1.5.0",
+    "angular-aria": "^1.5.0",
+    "angular-material": "^1.0.6",
+    "angular-messages": "^1.5.0",
+    "angular-resource": "^1.5.0",
+    "angular-ui-router": "^0.2.18",
+    "async": "^1.4.2",
+    "body-parser": "^1.13.2",
+    "composable-middleware": "^0.3.0",
+    "compression": "^1.5.1",
+    "connect-mongo": "^0.8.2",
+    "cookie-parser": "^1.3.5",
+    "dialog-polyfill": "^0.4.3",
+    "ejs": "^2.3.3",
+    "errorhandler": "^1.4.1",
+    "express": "^4.13.1",
+    "express-jwt": "^3.0.1",
+    "express-session": "^1.11.3",
+    "hammerjs": "^2.0.6",
+    "jsonwebtoken": "^5.0.4",
+    "lodash": "^3.10.0",
+    "material-design-lite": "^1.1.2",
+    "method-override": "^2.3.4",
+    "mongoose": "^4.1.3",
+    "morgan": "^1.6.1",
+    "passport": "^0.2.2",
+    "passport-local": "^1.0.0",
+    "serve-favicon": "^2.3.0"
+  },
+  "devDependencies": {
+    "browser-sync": "2.7.11",
+    "gulp": "^3.9.0",
+    "gulp-nodemon": "^2.0.3"
+  }
+}

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<base href="/dashboard">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Products</title>
+    <link rel="stylesheet" href="material-design-lite/material.min.css">
+    <link rel="stylesheet" type="text/css" href="dialog-polyfill/dialog-polyfill.css" />
+    <link rel="stylesheet" href="/css/animate.css">
+    <link rel="stylesheet" href="/web/css/app.css">
+</head>
+
+<body onload="products.getData()">
+    <div id="demo-toast-example" class="mdl-js-snackbar mdl-snackbar">
+        <div class="mdl-snackbar__text"></div>
+        <button class="mdl-snackbar__action" type="button"></button>
+    </div>
+    <div class="flex row start primary" style="height:60px">
+        <h3 style="margin:auto 30px auto 30px;color:white">Vanilla</h3>
+        <a href="/clients" style="text-decoration:none;margin-right:20px"><h6 style="margin:25px;color:white">Clients</h6></a>
+        <a href="/products" class="active"><h6 style="margin:25px;color:white">Products</h6></a>
+        <div id="exit" onclick="clients.logout()" style="margin: auto 30px auto auto;cursor: pointer">
+            <img src="/material-icons/ic_exit_to_app_white_24px.svg" alt="sorry no pic for you!" />
+        </div>
+        <div class="mdl-tooltip mdl-tooltip--left" for="exit">
+            Exit
+        </div>
+    </div>
+    <div class="flex row jEnd">
+        <div style="margin:10px">
+            <button id="reset" onclick="products.reset()" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored" style="background-color:red">
+                <img src="/material-icons/ic_refresh_white_24px.svg" alt="sorry no pic for you!" />
+            </button>
+            <div class="mdl-tooltip mdl-tooltip--left" for="reset">
+                Reset data
+            </div>
+        </div>
+    </div>
+    <div class="flex row end">
+        <div class="mdl-card mdl-shadow--6dp flex-item" style="margin:20px;min-height:30vh">
+            <div class="flex row jBetween">
+                <div style="padding:10px">Products</div>
+                <div>
+                    <button id="addClient" class="mdl-button mdl-js-button mdl-button--icon" onclick="products.addProductDialog()">
+                        <img src="/material-icons/ic_add_24px.svg" alt="sorry no pic for you!" />
+                    </button>
+                    <div class="mdl-tooltip mdl-tooltip--left" for="addClient">
+                        Add product
+                    </div>
+                </div>
+            </div>
+            <div class="mdl-card__actions mdl-card--border">
+            </div>
+            <div id="productList" class="flex column" style="padding:0 10px 20px 10px;"></div>
+        </div>
+        <div class="mdl-card mdl-shadow--6dp flex-item" style="margin:20px">
+            <div style="padding:10px">Details</div>
+            <div class="mdl-card__actions mdl-card--border">
+            </div>
+            <div id="productDetails" class="flex column" style="padding:0 10px 20px 10px;"></div>
+        </div>
+    </div>
+    <dialog id="productDialog" class="dialog">
+        <div style="border-bottom:2px solid #E1E1E1;padding:10px" id="add">Add product</div>
+        <form name="productForm" action="#" style="margin:10px 10px 0 10px">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" id="name">
+                <label class="mdl-textfield__label" for="name">Name</label>
+            </div>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="number" id="price">
+                <label class="mdl-textfield__label" for="samplpricee3">Price</label>
+            </div>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="number" id="quantity">
+                <label class="mdl-textfield__label" for="quantity">Quantity</label>
+            </div>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" id="brand">
+                <label class="mdl-textfield__label" for="brand">Brand</label>
+            </div>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" id="model">
+                <label class="mdl-textfield__label" for="model">Model</label>
+            </div>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" id="origin">
+                <label class="mdl-textfield__label" for="origin">Origin</label>
+            </div>
+
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="number" id="rating">
+                <label class="mdl-textfield__label" for="rating">Rating</label>
+            </div>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" id="description">
+                <label class="mdl-textfield__label" for="description">Description</label>
+            </div>
+            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="returnable">
+                <input type="checkbox" id="returnable" class="mdl-checkbox__input">
+                <span class="mdl-checkbox__label">Returnable</span>
+            </label>
+        </form>
+        <div style="border-bottom:2px solid #E1E1E1"></div>
+        <div class="flex row jEnd">
+            <div class="item-flex">
+                <button class="mdl-button mdl-js-button mdl-js-ripple-effect" onclick="products.cancelProduct()">
+                    Cancel
+                </button>
+                <button class="mdl-button mdl-js-button mdl-js-ripple-effect" onclick="products.saveProduct()">
+                    Save
+                </button>
+            </div>
+        </div>
+    </dialog>
+
+    <script src="/web/js/clients.js"></script>
+    <script src="/web/js/auth.js"></script>
+    <script src="/web/js/products.js"></script>
+    <script src="material-design-lite/material.min.js"></script>
+</body>
+
+</html>

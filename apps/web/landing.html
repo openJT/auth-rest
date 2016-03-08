@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" style="overflow: hidden">
+<base href="/">
+
+<head>
+    <meta charset="UTF-8">
+    <title>auth-rest</title>
+    <link rel="stylesheet" href="material-design-lite/material.min.css">
+    <link rel="stylesheet" type="text/css" href="dialog-polyfill/dialog-polyfill.css" />
+    <link rel="stylesheet" href="/css/animate.css">
+    <link rel="stylesheet" href="/web/css/app.css">
+</head>
+
+
+<body>
+    <div class="flex column flex1 center" style="height:100vh">
+        <div style="height:60px" class="flex row jBetween primary">
+            <h3 style="margin:auto 30px auto 30px;color:white">auth-rest</h3>
+            <a href="https://github.com/openJT/auth-rest" id="exit" style="margin: auto 30px auto auto;cursor: pointer">
+                <img src="/material-icons/github.svg" alt="sorry no pic for you!" />
+                <div class="mdl-tooltip mdl-tooltip--left" for="exit">
+                    See it on github
+                </div>
+            </a>
+        </div>
+        <div class="flex row flex1 jCenter aCenter">
+            <div onclick="window.location.assign('/web')" class="mdl-card mdl-shadow--6dp animated  fadeInLeft landbox" style="margin:20px;cursor:pointer">
+                <h1 style="margin:auto">Vanilla</h1>
+            </div>
+            <div onclick="window.location.assign('/ng1')" class="mdl-card mdl-shadow--6dp animated fadeInRight landbox" style="margin:20px;cursor:pointer">
+                <h1 style="margin:auto">Angular</h1>
+            </div>
+        </div>
+    </div>
+    <script src="/web/js/auth.js"></script>
+    <script src="material-design-lite/material.min.js"></script>
+</body>
+
+</html>

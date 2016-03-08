@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<base href="/web">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="material-design-lite/material.min.css">
+    <link rel="stylesheet" type="text/css" href="dialog-polyfill/dialog-polyfill.css" />
+    <link rel="stylesheet" href="/css/animate.css">
+    <link rel="stylesheet" href="/web/css/app.css">
+</head>
+
+<body>
+    <div class="mdl-layout mdl-js-layout mdl-color--grey-100">
+        <main class="mdl-layout__content">
+            <div class="mdl-card mdl-shadow--6dp animated fadeInDown">
+                <div class="mdl-card__title mdl-color-text--white primary">
+                    <h2 class="mdl-card__title-text">Vanilla</h2>
+                </div>
+                <div class="mdl-card__supporting-text">
+                    <form name="loginForm">
+                        <div class="mdl-textfield mdl-js-textfield">
+                            <input class="mdl-textfield__input" type="email" id="email" />
+                            <label class="mdl-textfield__label" for="email">Email</label>
+                        </div>
+                        <div class="mdl-textfield mdl-js-textfield">
+                            <input class="mdl-textfield__input" type="password" id="password" />
+                            <label class="mdl-textfield__label" for="password">Password</label>
+                        </div>
+                        <div id="errorMsg" style="margin:10px auto 10px auto;text-align:center"></div>
+                    </form>
+                    <div class="mdl-card__actions mdl-card--border"></div>
+                </div>
+                <div style="margin:0 auto 20px auto">
+                    <button onclick="auth.auth()"style="background-color:#3F51B5" class="mdl-button mdl-js-button mdl-button--raised">
+                        <div style="color:white">Login</div>
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="/web/js/auth.js"></script>
+    <script src="material-design-lite/material.min.js"></script>
+</body>
+
+</html>
