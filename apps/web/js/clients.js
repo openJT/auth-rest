@@ -47,7 +47,7 @@ var clients = (function() {
 
                 var child = document.createElement("div");
                 child.className = "flex-item"
-                 row.className += " aCenter";
+                row.className += " aCenter";
                 child.innerHTML = clients[i].lastName;
                 row.appendChild(child);
 
