@@ -18,24 +18,25 @@
         <div layout="column" style="margin:20px">
             <div layout="row" flex style="border:3px solid black">
                 <div flex style="padding: 5px;font-weight: 600">Name</div>
-                <div flex style="border-left:3px solid black;padding: 5px;font-weight: 600">Last name</div>
-                <div flex style="border-left:3px solid black;padding: 5px;font-weight: 600">Company</div>
-                <div flex style="border-left:3px solid black;padding: 5px;font-weight: 600">Position</div>
+                <div flex class="hideColumnSmall" style="border-left:3px solid black;padding: 5px;font-weight: 600">Last name</div>
+                <div flex class="hideColumn" style="border-left:3px solid black;padding: 5px;font-weight: 600">Company</div>
+                <div flex class="hideColumn" style="border-left:3px solid black;padding: 5px;font-weight: 600">Position</div>
                 <div flex style="border-left:3px solid black;padding: 5px;font-weight: 600">Edit</div>
                 <div flex style="border-left:3px solid black;padding: 5px;font-weight: 600">Delete</div>
             </div>
-            <div ng-repeat="client in ctrl.clients" layout="row" class="over" flex>
-                <div flex style="border:1px solid black;padding: 5px">{{client.lastName}}</div>
-                <div flex style="border:1px solid black;padding: 5px">{{client.firstName}}</div>
-                <div flex style="border:1px solid black;padding: 5px">{{client.company}}</div>
-                <div flex style="border:1px solid black;padding: 5px">{{client.position}}</div>
-                <div flex style="border:1px solid black;padding: 5px">
+            <div ng-repeat="client in ctrl.clients" layout="row" layout-align="center center" 
+            class="over" style="padding-left:2px" ng-class="{'even' : $even}">
+                <div flex>{{client.lastName}}</div>
+                <div class="hideColumnSmall" flex>{{client.firstName}}</div>
+                <div flex class="hideColumn">{{client.company}}</div>
+                <div flex class="hideColumn">{{client.position}}</div>
+                <div flex>
                     <md-button class="md-icon-button" aria-label="Edit client" ng-click="ctrl.editClient($event,client)">
                         <md-icon md-svg-icon="material-icons/ic_edit_24px.svg"></md-icon>
                         <md-tooltip md-direction="right">Edit client</md-tooltip>
                     </md-button>
                 </div>
-                <div flex style="border:1px solid black;padding: 5px">
+                <div flex>
                     <md-button class="md-icon-button" aria-label="Delete client" ng-click="ctrl.deleteClient(client)">
                         <md-icon md-svg-icon="material-icons/ic_delete_48px.svg"></md-icon>
                         <md-tooltip md-direction="right">Delete client</md-tooltip>

@@ -4,12 +4,34 @@ html body {
     overflow: hidden;
     margin: 0;
 }
-.over:hover{
-     background-color: #C8C8C8;
+
+.over:hover {
+    background-color: #C8C8C8;
 }
-.noselect{
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+
+.noselect {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.even {
+    background-color: #edeaea;
+    outline: none;
+}
+
+
+/* Small Devices, Tablets */
+
+@media only screen and (max-width: 599px) {
+    .hideColumnSmall {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .hideColumn {
+        display: none;
+    }
 }
