@@ -17,10 +17,21 @@
         <button class="mdl-snackbar__action" type="button"></button>
     </div>
     <div class="flex row end primary" style="height:60px">
-        <h3 style="margin:auto 30px auto 30px;color:white">Vanilla</h3>
+        <h3 style="margin:auto 30px auto 30px;color:white" class="hideSmall">Vanilla</h3>
+        <div mdl class="hideLarge" style="margin:auto 20px auto 20px">
+            <!-- Left aligned menu below button -->
+            <button id="demo-menu-lower-left" class="mdl-button mdl-js-button mdl-button--icon">
+                <img src="/material-icons/ic_more_vert_white_24px.svg" />
+            </button>
+
+            <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="demo-menu-lower-left">
+                <li class="mdl-menu__item" onclick="clients.reset()">Reset data</li>
+                <li class="mdl-menu__item mdl-menu__item--full-bleed-divider" onclick="clients.logout()">Exit</li>
+            </ul>
+        </div>
         <a href="/clients" class="active"><h6 style="margin:25px;color:white">Clients</h6></a>
         <a href="/products" style="text-decoration:none;margin-right:20px"><h6 style="margin:25px;color:white">Products</h6></a>
-        <div id="exit" onclick="clients.logout()" style="margin: auto 30px auto auto;cursor: pointer">
+        <div id="exit" onclick="clients.logout()" style="margin: auto 30px auto auto;cursor: pointer" class="hideSmall">
             <img src="/material-icons/ic_exit_to_app_white_24px.svg" alt="sorry no pic for you!" />
         </div>
         <div class="mdl-tooltip mdl-tooltip--left" for="exit">
@@ -39,8 +50,8 @@
     </div>
     <div class="flex row">
         <div class="mdl-card mdl-shadow--6dp flex-item" style="margin:20px">
-            <div class="flex row jBetween" style="margin:5px">
-                <h4 class="flex" style="margin:auto 30px auto 30px">Client management</h4>
+            <div class="flex row jBetween">
+                <div style="padding:10px">Client management</div>
                 <div>
                     <button id="addClient" onclick="clients.addClientDialog()" class="mdl-button mdl-js-button mdl-button--icon" onclick="products.addProductDialog()">
                         <img src="/material-icons/ic_add_24px.svg" alt="sorry no pic for you!" />
@@ -52,14 +63,14 @@
             </div>
             <div class="mdl-card__actions mdl-card--border">
                 <div class="flex row border3">
-                    <div class="flex-item bold pad5">Name</div>
-                    <div class="flex-item borderLeft bold pad5">First name</div>
-                    <div class="flex-item borderLeft bold pad5">Company</div>
-                    <div class="flex-item borderLeft bold pad5">Position</div>
-                    <div class="flex-item borderLeft bold pad5">Edit</div>
-                    <div class="flex-item borderLeft bold pad5">Delete</div>
+                    <div class="flex-item bold ">Name</div>
+                    <div class="flex-item  bold hideColumnSmall">First name</div>
+                    <div class="flex-item  bold hideColumn">Company</div>
+                    <div class="flex-item  bold hideColumn">Position</div>
+                    <div class="flex-item  bold">Edit</div>
+                    <div class="flex-item  bold">Delete</div>
                 </div>
-                <div id="main" class="flex column center pad10"></div>
+                <div id="main" class="flex column" style="padding-top:10px"></div>
             </div>
         </div>
         <dialog id="dialog" class="dialog">
@@ -83,7 +94,7 @@
                     <label class="mdl-textfield__label" for="position">Position</label>
                 </div>
             </form>
-             <div style="border-bottom:2px solid #E1E1E1"></div>
+            <div style="border-bottom:2px solid #E1E1E1"></div>
             <div class="flex row jEnd">
                 <div class="item-flex">
                     <button class="mdl-button mdl-js-button mdl-js-ripple-effect" onclick="clients.cancel()">

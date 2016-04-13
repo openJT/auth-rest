@@ -1,4 +1,4 @@
-var products = (function () {
+var products = (function() {
     'use strict';
     var products, productDetail;
     var dialog = document.querySelector('#productDialog');
@@ -18,7 +18,7 @@ var products = (function () {
         http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         if (window.localStorage.getItem("token")) http.setRequestHeader("Authorization", token)
         http.setRequestHeader("Accept", "application/json");
-        http.onreadystatechange = function () {
+        http.onreadystatechange = function() {
             if (http.readyState == 4 && http.status == 200) {
                 products = JSON.parse(http.responseText);
                 drawTable();
@@ -35,27 +35,25 @@ var products = (function () {
         var element = document.getElementById("productList");
         element.innerHTML = "";
         for (var i = 0; i < products.length; i++) {
-            (function (i) {
+            (function(i) {
                 var row = document.createElement("div");
                 row.className = "flex-item";
                 row.className += " row";
                 row.className += " over";
-                row.className += " jBetween";
-                row.style.margin = "2px";
+                row.style.padding = "2px";
                 var child = document.createElement("div");
                 child.className = "flex-item"
                 child.innerHTML = products[i].name;
                 row.appendChild(child);
 
                 var child2 = document.createElement("div");
-                child2.className = "flex-item"
+                child2.className = "flex-item jEnd"
                 row.appendChild(child2);
 
                 var child3 = document.createElement("img");
-                child3.onclick = function () { getDetails(products[i]._id) };
+                child3.onclick = function() { getDetails(products[i]._id) };
                 child3.src = "material-icons/ic_info_outline_24px.svg";
                 child3.style.cursor = "pointer";
-
                 child2.appendChild(child3);
                 element.appendChild(row);
             })(i)
@@ -70,7 +68,7 @@ var products = (function () {
         http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         if (window.localStorage.getItem("token")) http.setRequestHeader("Authorization", token)
         http.setRequestHeader("Accept", "application/json");
-        http.onreadystatechange = function () {
+        http.onreadystatechange = function() {
             if (http.readyState == 4 && http.status == 200) {
                 productDetail = JSON.parse(http.responseText);
                 drawDetails();
@@ -152,10 +150,10 @@ var products = (function () {
     }
     function saveProduct() {
         console.log(document.forms["productForm"].elements['returnable'].value);
-        if (document.forms["productForm"].elements['returnable'].value === "on"){
+        if (document.forms["productForm"].elements['returnable'].value === "on") {
             document.forms["productForm"].elements['returnable'].value = false;
         }
-        else  document.forms["productForm"].elements['returnable'].value = true;
+        else document.forms["productForm"].elements['returnable'].value = true;
         var http = new XMLHttpRequest();
         var url = "/product";
         http.open("POST", url, true);
@@ -163,7 +161,7 @@ var products = (function () {
         if (window.localStorage.getItem("token")) http.setRequestHeader("Authorization", token)
         http.setRequestHeader("Content-type", "application/json");
         http.setRequestHeader("Accept", "application/json");
-        http.onreadystatechange = function () {
+        http.onreadystatechange = function() {
             if (http.readyState == 4 && http.status == 201) {
                 dialog.close();
                 getData();
@@ -212,9 +210,9 @@ var products = (function () {
         var token = 'Bearer ' + window.localStorage.getItem("token");
         if (window.localStorage.getItem("token")) http.setRequestHeader("Authorization", token)
         http.setRequestHeader("Accept", "application/json");
-        http.onreadystatechange = function () {
+        http.onreadystatechange = function() {
             if (http.readyState == 4 && http.status == 200) {
-                setTimeout(function () { getData(); }, 1500)
+                setTimeout(function() { getData(); }, 1500)
             }
             else if (http.readyState == 4 && http.status == 401) {
                 window.localStorage.removeItem("token");

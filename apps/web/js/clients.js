@@ -47,31 +47,31 @@ var clients = (function() {
 
                 var child = document.createElement("div");
                 child.className = "flex-item"
+                 row.className += " aCenter";
                 child.innerHTML = clients[i].lastName;
                 row.appendChild(child);
 
                 var child2 = document.createElement("div");
                 child2.className = "flex-item";
-                child2.className += " borderLeft";
+                child2.className += " hideColumnSmall";
                 child2.innerHTML = clients[i].firstName;
                 row.appendChild(child2);
 
                 var child3 = document.createElement("div");
                 child3.className = "flex-item";
-                child3.className += " borderLeft";
+                child3.className += " hideColumn";
                 child3.innerHTML = clients[i].company;
                 row.appendChild(child3);
 
                 var child4 = document.createElement("div");
                 child4.className = "flex-item";
-                child4.className += " borderLeft";
+                child4.className += " hideColumn";
                 child4.innerHTML = clients[i].position;
                 row.appendChild(child4);
 
                 var child5 = document.createElement("div");
                 child5.onclick = function() { editClient(i) };
                 child5.className += " flex-item";
-                child5.className += " borderLeft";
 
                 var child6 = document.createElement("img");
                 child6.src = "material-icons/ic_edit_24px.svg";
@@ -82,7 +82,6 @@ var clients = (function() {
                 var child7 = document.createElement("div");
                 child7.onclick = function() { deleteClient(i) };
                 child7.className += " flex-item";
-                child7.className += " borderLeft";
 
                 var child8 = document.createElement("img");
                 child8.src = "material-icons/ic_delete_24px.svg";
@@ -229,6 +228,6 @@ var clients = (function() {
         dialog.close();
         resetForm();
     }
-   
+
 })()
 

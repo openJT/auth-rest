@@ -1,9 +1,9 @@
 
-var auth = (function () {
+var auth = (function() {
     'use strict';
     var message;
     return {
-        auth:auth
+        auth: auth
     }
     function auth() {
         var http = new XMLHttpRequest();
@@ -11,7 +11,7 @@ var auth = (function () {
         http.open("POST", url, true);
         http.setRequestHeader("Content-type", "application/json");
         http.setRequestHeader("Accept", "application/json");
-        http.onreadystatechange = function () {
+        http.onreadystatechange = function() {
             if (http.readyState == 4 && http.status == 200) {
                 window.localStorage.setItem('token', JSON.parse(http.responseText).token);
                 window.location.assign('/clients')
