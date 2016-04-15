@@ -3,12 +3,14 @@ var clients = (function () {
     'use strict';
     var clients = [], message, currentClient;
     var dialog = document.querySelector('#dialog');
+    var editDialog = document.querySelector('#editDialog');
     var socket = io('/admin', { 'query': 'token=' + window.localStorage.getItem("token") });
     var snackbarContainer = document.querySelector('#toast');
 
     socket.on('addClient', function (client) {
         clients.push(client);
-        drawTable({ message: client.firstName + " " + client.lastName + " was added!" });
+        drawTable();
+        toast({ message: client.firstName + " " + client.lastName + " was added!" });
     });
     socket.on('deleteClient', function (client) {
         clients.forEach(function (t, i) {
