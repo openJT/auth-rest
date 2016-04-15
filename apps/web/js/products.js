@@ -122,7 +122,6 @@ var products = (function () {
     function getDetails(id) {
         var http = new XMLHttpRequest();
         var url = "/product/" + id;
-
         http.open("GET", url, true);
         var token = 'Bearer ' + window.localStorage.getItem("token");
         http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -207,41 +206,48 @@ var products = (function () {
         row.appendChild(child9);
         element.appendChild(row);
     }
-
-
     function addProductDialog() {
         showDialog();
     }
     function saveProduct() {
-        if (document.forms["productForm"].elements['returnable'].value === "on") {
-            document.forms["productForm"].elements['returnable'].value = false;
+        if (
+            document.forms["productForm"].elements['name'].value === ''
+        ) {
+            var data = { message: 'Please fill all required fields' };
+            snackbarContainer.MaterialSnackbar.showSnackbar(data);
         }
-        else document.forms["productForm"].elements['returnable'].value = true;
-        var http = new XMLHttpRequest();
-        var url = "/product";
-        http.open("POST", url, true);
-        var token = 'Bearer ' + window.localStorage.getItem("token");
-        if (window.localStorage.getItem("token")) http.setRequestHeader("Authorization", token)
-        http.setRequestHeader("Content-type", "application/json");
-        http.setRequestHeader("Accept", "application/json");
-        http.onreadystatechange = function () {
-            if (http.readyState == 4 && http.status == 201) {
-                dialog.close();
-                getData();
-                resetForm();
+        else {
+            if (document.forms["productForm"].elements['returnable'].value === "on") {
+                document.forms["productForm"].elements['returnable'].value = false;
             }
+            else document.forms["productForm"].elements['returnable'].value = true;
+
+            var http = new XMLHttpRequest();
+            var url = "/product";
+            http.open("POST", url, true);
+            var token = 'Bearer ' + window.localStorage.getItem("token");
+            if (window.localStorage.getItem("token")) http.setRequestHeader("Authorization", token)
+            http.setRequestHeader("Content-type", "application/json");
+            http.setRequestHeader("Accept", "application/json");
+            http.onreadystatechange = function () {
+                if (http.readyState == 4 && http.status == 201) {
+                    dialog.close();
+                    getData();
+                    resetForm();
+                }
+            }
+            http.send(JSON.stringify({
+                name: document.forms["productForm"].elements['name'].value,
+                price: document.forms["productForm"].elements['price'].value,
+                quantity: document.forms["productForm"].elements['quantity'].value,
+                brand: document.forms["productForm"].elements['brand'].value,
+                model: document.forms["productForm"].elements['model'].value,
+                origin: document.forms["productForm"].elements['origin'].value,
+                returnable: document.forms["productForm"].elements['returnable'].value,
+                rating: document.forms["productForm"].elements['rating'].value,
+                description: document.forms["productForm"].elements['description'].value
+            }));
         }
-        http.send(JSON.stringify({
-            name: document.forms["productForm"].elements['name'].value,
-            price: document.forms["productForm"].elements['price'].value,
-            quantity: document.forms["productForm"].elements['quantity'].value,
-            brand: document.forms["productForm"].elements['brand'].value,
-            model: document.forms["productForm"].elements['model'].value,
-            origin: document.forms["productForm"].elements['origin'].value,
-            returnable: document.forms["productForm"].elements['returnable'].value,
-            rating: document.forms["productForm"].elements['rating'].value,
-            description: document.forms["productForm"].elements['description'].value
-        }));
     }
     function deleteProduct(id) {
         var http = new XMLHttpRequest();
@@ -267,15 +273,7 @@ var products = (function () {
         resetForm();
     }
     function resetForm() {
-        document.forms["productForm"].elements['name'].value = 'No name';
-        document.forms["productForm"].elements['price'].value = 0;
-        document.forms["productForm"].elements['quantity'].value = 0;
-        document.forms["productForm"].elements['brand'].value = '';
-        document.forms["productForm"].elements['model'].value = '';
-        document.forms["productForm"].elements['origin'].value = '';
-        document.forms["productForm"].elements['returnable'].value = true;
-        document.forms["productForm"].elements['rating'].value = 0;
-        document.forms["productForm"].elements['description'].value = '';
+        document.forms["productForm"].reset();
     }
     function showDialog() {
         if (!dialog.showModal) dialogPolyfill.registerDialog(dialog);
