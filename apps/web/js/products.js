@@ -1,14 +1,65 @@
-var products = (function() {
+var products = (function () {
     'use strict';
     var products, productDetail;
     var dialog = document.querySelector('#productDialog');
+    var socket = io('/admin', { 'query': 'token=' + window.localStorage.getItem("token") });
+    var snackbarContainer = document.querySelector('#toast');
+
+    socket.on('addProduct', function (product) {
+        products.push(product);
+        drawTable();
+        toast({ message: product.name + " added!" });
+    });
+    socket.on('deleteProduct', function (product) {
+        products.forEach(function (t, i) {
+            if (t._id === product._id) {
+                products.splice(i, 1);
+                drawTable();
+                toast({ message: product.name + " deleted!" });
+            }
+        });
+    });
+    socket.on('updateProduct', function (product) {
+        products.forEach(function (t, i) {
+            if (t._id === product._id) {
+                products[i] = product;
+                drawTable();
+                toast({ message: product.name + " updated!" });
+            }
+        });
+    });
+    socket.on('reset', function (product) {
+        var http = new XMLHttpRequest();
+        var url = "/product";
+        http.open("GET", url, true);
+        var token = 'Bearer ' + window.localStorage.getItem("token");
+        http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        if (window.localStorage.getItem("token")) http.setRequestHeader("Authorization", token)
+        http.setRequestHeader("Accept", "application/json");
+        http.onreadystatechange = function () {
+            if (http.readyState == 4 && http.status == 200) {
+                products = JSON.parse(http.responseText);
+                drawTable();
+                toast({ message: "Data reset!" });
+            }
+            else if (http.readyState == 4 && http.status == 401) {
+                window.localStorage.removeItem("token");
+                window.location.assign('/web');
+            }
+        }
+        http.send();
+    })
     return {
         getData: getData,
         addProductDialog: addProductDialog,
         saveProduct: saveProduct,
         cancelProduct: cancelProduct,
-        reset: reset
+        reset: reset,
+        logout: logout
 
+    }
+    function toast(msg) {
+        snackbarContainer.MaterialSnackbar.showSnackbar(msg);
     }
     function getData() {
         var http = new XMLHttpRequest();
@@ -18,7 +69,7 @@ var products = (function() {
         http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         if (window.localStorage.getItem("token")) http.setRequestHeader("Authorization", token)
         http.setRequestHeader("Accept", "application/json");
-        http.onreadystatechange = function() {
+        http.onreadystatechange = function () {
             if (http.readyState == 4 && http.status == 200) {
                 products = JSON.parse(http.responseText);
                 drawTable();
@@ -35,7 +86,7 @@ var products = (function() {
         var element = document.getElementById("productList");
         element.innerHTML = "";
         for (var i = 0; i < products.length; i++) {
-            (function(i) {
+            (function (i) {
                 var row = document.createElement("div");
                 row.className = "flex-item";
                 row.className += " row";
@@ -51,7 +102,7 @@ var products = (function() {
                 row.appendChild(child2);
 
                 var child3 = document.createElement("img");
-                child3.onclick = function() { getDetails(products[i]._id) };
+                child3.onclick = function () { getDetails(products[i]._id) };
                 child3.src = "material-icons/ic_info_outline_24px.svg";
                 child3.style.cursor = "pointer";
                 child2.appendChild(child3);
@@ -68,7 +119,7 @@ var products = (function() {
         http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         if (window.localStorage.getItem("token")) http.setRequestHeader("Authorization", token)
         http.setRequestHeader("Accept", "application/json");
-        http.onreadystatechange = function() {
+        http.onreadystatechange = function () {
             if (http.readyState == 4 && http.status == 200) {
                 productDetail = JSON.parse(http.responseText);
                 drawDetails();
@@ -149,7 +200,6 @@ var products = (function() {
         showDialog();
     }
     function saveProduct() {
-        console.log(document.forms["productForm"].elements['returnable'].value);
         if (document.forms["productForm"].elements['returnable'].value === "on") {
             document.forms["productForm"].elements['returnable'].value = false;
         }
@@ -161,7 +211,7 @@ var products = (function() {
         if (window.localStorage.getItem("token")) http.setRequestHeader("Authorization", token)
         http.setRequestHeader("Content-type", "application/json");
         http.setRequestHeader("Accept", "application/json");
-        http.onreadystatechange = function() {
+        http.onreadystatechange = function () {
             if (http.readyState == 4 && http.status == 201) {
                 dialog.close();
                 getData();
@@ -210,9 +260,9 @@ var products = (function() {
         var token = 'Bearer ' + window.localStorage.getItem("token");
         if (window.localStorage.getItem("token")) http.setRequestHeader("Authorization", token)
         http.setRequestHeader("Accept", "application/json");
-        http.onreadystatechange = function() {
+        http.onreadystatechange = function () {
             if (http.readyState == 4 && http.status == 200) {
-                setTimeout(function() { getData(); }, 1500)
+                setTimeout(function () { getData(); }, 1500)
             }
             else if (http.readyState == 4 && http.status == 401) {
                 window.localStorage.removeItem("token");
@@ -221,5 +271,8 @@ var products = (function() {
         }
         http.send();
     }
-    resetForm();
+    function logout() {
+        window.localStorage.removeItem("token");
+        window.location.assign('/');
+    }
 })()

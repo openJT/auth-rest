@@ -12,7 +12,7 @@
 </head>
 
 <body onload="products.getData()">
-    <div id="demo-toast-example" class="mdl-js-snackbar mdl-snackbar">
+    <div id="toast" class="mdl-js-snackbar mdl-snackbar">
         <div class="mdl-snackbar__text"></div>
         <button class="mdl-snackbar__action" type="button"></button>
     </div>
@@ -25,13 +25,13 @@
             </button>
 
             <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="demo-menu-lower-left">
-                <li class="mdl-menu__item" onclick="clients.reset()">Reset data</li>
-                <li class="mdl-menu__item mdl-menu__item--full-bleed-divider" onclick="clients.logout()">Exit</li>
+                <li class="mdl-menu__item" onclick="products.reset()">Reset data</li>
+                <li class="mdl-menu__item mdl-menu__item--full-bleed-divider" onclick="products.logout()">Exit</li>
             </ul>
         </div>
         <a href="/clients" style="text-decoration:none;margin-right:20px"><h6 style="margin:25px;color:white">Clients</h6></a>
         <a href="/products" class="active"><h6 style="margin:25px;color:white">Products</h6></a>
-        <div id="exit" onclick="clients.logout()" style="margin: auto 30px auto auto;cursor: pointer" class="hideSmall">
+        <div id="exit" onclick="products.logout()" style="margin: auto 30px auto auto;cursor: pointer" class="hideSmall">
             <img src="/material-icons/ic_exit_to_app_white_24px.svg" alt="sorry no pic for you!" />
         </div>
         <div class="mdl-tooltip mdl-tooltip--left" for="exit">
@@ -126,7 +126,7 @@
         </div>
     </dialog>
 
-    <script src="/web/js/clients.js"></script>
+    <script src="socket.io/socket.io.js"></script>
     <script src="/web/js/auth.js"></script>
     <script src="/web/js/products.js"></script>
     <script src="material-design-lite/material.min.js"></script>
