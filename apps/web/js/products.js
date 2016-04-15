@@ -107,6 +107,14 @@ var products = (function () {
                 child3.style.cursor = "pointer";
                 child2.appendChild(child3);
                 element.appendChild(row);
+
+                var child4 = document.createElement("img");
+                child4.onclick = function () { deleteProduct(products[i]._id) };
+                child4.src = "material-icons/ic_delete_24px.svg";
+                child4.style.cursor = "pointer";
+                child4.style.marginLeft = "20px";
+                child2.appendChild(child4);
+                element.appendChild(row);
             })(i)
         }
     }
@@ -229,6 +237,25 @@ var products = (function () {
             rating: document.forms["productForm"].elements['rating'].value,
             description: document.forms["productForm"].elements['description'].value
         }));
+    }
+    function deleteProduct(id) {
+        var http = new XMLHttpRequest();
+        var url = "/product/" + id;
+
+        http.open("DELETE", url, true);
+        var token = 'Bearer ' + window.localStorage.getItem("token");
+        http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        if (window.localStorage.getItem("token")) http.setRequestHeader("Authorization", token)
+        http.setRequestHeader("Accept", "application/json");
+        http.onreadystatechange = function () {
+            if (http.readyState == 4 && http.status == 200) {
+            }
+            else if (http.readyState == 4 && http.status == 401) {
+                window.localStorage.removeItem("token");
+                window.location.assign('/web');
+            }
+        }
+        http.send();
     }
     function cancelProduct() {
         dialog.close();
