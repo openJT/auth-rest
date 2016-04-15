@@ -3,14 +3,14 @@
   "version": "1.0.0",
   "description": "A REST API demo, Node.js with authentication, angularjs and vanilla JavaScript front ends",
   "main": "server/app.js",
-   "scripts": {
+  "scripts": {
     "start": "node server/app.js"
   },
   "dependencies": {
     "angular": "^1.5.0",
     "angular-animate": "^1.5.0",
     "angular-aria": "^1.5.0",
-    "angular-material": "^1.0.6",
+    "angular-material": "^1.0.7",
     "angular-messages": "^1.5.0",
     "angular-resource": "^1.5.0",
     "angular-ui-router": "^0.2.18",
@@ -35,7 +35,9 @@
     "morgan": "^1.6.1",
     "passport": "^0.2.2",
     "passport-local": "^1.0.0",
-    "serve-favicon": "^2.3.0"
+    "serve-favicon": "^2.3.0",
+    "socket.io": "^1.4.5",
+    "socketio-jwt": "^4.3.4"
   },
   "devDependencies": {
     "browser-sync": "2.7.11",
