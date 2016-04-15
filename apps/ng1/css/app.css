@@ -21,6 +21,9 @@ html body {
     outline: none;
 }
 
+md-input-container.md-input-invalid > label {
+    color: red;
+}
 
 /* Small Devices, Tablets */
 

@@ -6,12 +6,12 @@
             <md-divider></md-divider>
             <div style="padding: 10px">
                 <md-input-container>
-                    <label>Name</label>
-                    <input ng-model="ctrl.client.lastName">
+                    <label>Name (required)</label>
+                    <input ng-model="ctrl.client.lastName" name="lastName" required="true">
                 </md-input-container>
                 <md-input-container style="">
-                    <label>First name</label>
-                    <input ng-model="ctrl.client.firstName">
+                    <label>First name (required)</label>
+                    <input ng-model="ctrl.client.firstName" name="firstName" required="true">
                 </md-input-container>
                 <md-input-container>
                     <label>Company</label>
@@ -25,7 +25,7 @@
             <md-divider></md-divider>
             <div layout="row" layout-align="end end">
                 <md-button ng-click="ctrl.cancel()">Cancel</md-button>
-                <md-button ng-click="ctrl.save()" ng-disabled="!form.$dirty">Save</md-button>
+                <md-button ng-click="ctrl.save()" ng-disabled="!form.$dirty || !form.$valid">Save</md-button>
             </div>
         </form>
     </md-content>
