@@ -73,17 +73,48 @@
                 <div id="main" class="flex column" style="padding-top:10px"></div>
             </div>
         </div>
+        <dialog id="editDialog" class="dialog">
+            <div style="border-bottom:2px solid #E1E1E1;padding:10px 0 10px 10px">Edit client</div>
+            <form id="editForm" name="editForm" action="#" style="margin:10px 10px 0 10px">
+                <div class="mdl-textfield mdl-js-textfield" style="">
+                    <label style="font-size:75%;color:#3F51B5" for="lastName">Name (required)</label>
+                    <input class="mdl-textfield__input" type="text" id="lastName">
+                </div>
+                <div class="mdl-textfield mdl-js-textfield">
+                    <label style="font-size:75%;color:#3F51B5" for="firstName">Last name (required)</label>
+                    <input class="mdl-textfield__input" type="text" id="firstName">
+                </div>
+                <div class="mdl-textfield mdl-js-textfield">
+                    <label style="font-size:75%;color:#3F51B5" for="company">Company</label>
+                    <input class="mdl-textfield__input" type="text" id="company">
+                </div>
+                <div class="mdl-textfield mdl-js-textfield">
+                    <label style="font-size:75%;color:#3F51B5" for="position">Position</label>
+                    <input class="mdl-textfield__input" type="text" id="position">
+                </div>
+            </form>
+            <div style="border-bottom:2px solid #E1E1E1"></div>
+            <div class="flex row jEnd">
+                <div class="item-flex">
+                    <button class="mdl-button mdl-js-button mdl-js-ripple-effect" onclick="clients.cancelEdit()">
+                        Cancel
+                    </button>
+                    <button class="mdl-button mdl-js-button mdl-js-ripple-effect" id="addButton" type="submit" value="Submit" onclick="clients.updateClient()">
+                        Save
+                    </button>
+                </div>
+            </div>
+        </dialog>
         <dialog id="dialog" class="dialog">
             <div style="border-bottom:2px solid #E1E1E1;padding:10px 0 10px 10px" id="add">Add client</div>
-            <div style="border-bottom:2px solid #E1E1E1;padding:10px 0 10px 10px" id="edit">Edit client</div>
-            <form name="laForm" action="#" style="margin:10px 10px 0 10px">
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="">
+            <form id="laForm" name="laForm" action="#" style="margin:10px 10px 0 10px">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-valid" style="">
                     <input class="mdl-textfield__input" type="text" id="lastName">
-                    <label class="mdl-textfield__label" for="lastName">Name</label>
+                    <label class="mdl-textfield__label" for="lastName">Name (required)</label>
                 </div>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                     <input class="mdl-textfield__input" type="text" id="firstName">
-                    <label class="mdl-textfield__label" for="firstName">Last name</label>
+                    <label class="mdl-textfield__label" for="firstName">Last name (required)</label>
                 </div>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                     <input class="mdl-textfield__input" type="text" id="company">
@@ -100,7 +131,7 @@
                     <button class="mdl-button mdl-js-button mdl-js-ripple-effect" onclick="clients.cancel()">
                         Cancel
                     </button>
-                    <button class="mdl-button mdl-js-button mdl-js-ripple-effect" id="addButton" onclick="clients.saveClient()">
+                    <button class="mdl-button mdl-js-button mdl-js-ripple-effect" id="addButton" type="submit" value="Submit" onclick="clients.saveClient()">
                         Save
                     </button>
                 </div>
@@ -111,7 +142,7 @@
         <script src="/web/js/clients.js"></script>
         <script src="/web/js/auth.js"></script>
         <script src="material-design-lite/material.min.js"></script>
-     </div>
+    </div>
 </body>
 
 </html>

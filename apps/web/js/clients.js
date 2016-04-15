@@ -59,7 +59,9 @@ var clients = (function () {
         drawTable: drawTable,
         getData: getData,
         cancel: cancel,
-        reset: reset
+        cancelEdit: cancelEdit,
+        reset: reset,
+        updateClient: updateClient
     }
     function toast(msg) {
         snackbarContainer.MaterialSnackbar.showSnackbar(msg);
@@ -149,13 +151,12 @@ var clients = (function () {
     }
     function saveClient() {
         if (
-            document.forms["laForm"].elements['lastName'].value === '' &&
-            document.forms["laForm"].elements['firstName'].value === '' &&
-            document.forms["laForm"].elements['company'].value === '' &&
-            document.forms["laForm"].elements['position'].value === ''
+            document.forms["laForm"].elements['lastName'].value === '' ||
+            document.forms["laForm"].elements['firstName'].value === ''
         ) {
-            var data = { message: 'Form cannot be empty!' };
+            var data = { message: 'Please fill all required fields' };
             snackbarContainer.MaterialSnackbar.showSnackbar(data);
+
         }
         else if (document.getElementById("add").style.display === "none") updateClient();
         else addClient();
@@ -183,41 +184,47 @@ var clients = (function () {
     }
     function editClient(i) {
         currentClient = i;
-        document.getElementById("add").style.display = "none";
-        document.getElementById("edit").style.display = "block";
-        showDialog();
+        showEditDialog();
         setTimeout(function () {
-            document.forms["laForm"].elements['lastName'].value = clients[i].lastName;
-            document.forms["laForm"].elements['firstName'].value = clients[i].firstName;
-            document.forms["laForm"].elements['company'].value = clients[i].company;
-            document.forms["laForm"].elements['position'].value = clients[i].position;
-        }, 500)
+            document.forms["editForm"].elements['lastName'].value = clients[i].lastName;
+            document.forms["editForm"].elements['firstName'].value = clients[i].firstName;
+            document.forms["editForm"].elements['company'].value = clients[i].company;
+            document.forms["editForm"].elements['position'].value = clients[i].position;
+        }, 0)
 
     }
     function updateClient() {
-        var http = new XMLHttpRequest();
-        var url = "/client";
-        http.open("PUT", url, true);
-        var token = 'Bearer ' + window.localStorage.getItem("token");
-        if (window.localStorage.getItem("token")) http.setRequestHeader("Authorization", token)
-        http.setRequestHeader("Content-type", "application/json");
-        http.setRequestHeader("Accept", "application/json");
-        http.onreadystatechange = function () {
-            if (http.readyState == 4 && http.status == 200) {
-                dialog.close();
-                resetForm();
-            }
-            else if (http.readyState == 4 && http.status == 401) {
-
-            }
+        if (
+            document.forms["editForm"].elements['lastName'].value === '' ||
+            document.forms["editForm"].elements['firstName'].value === ''
+        ) {
+            var data = { message: 'Please fill all required fields' };
+            snackbarContainer.MaterialSnackbar.showSnackbar(data);
         }
-        http.send(JSON.stringify({
-            _id: clients[currentClient]._id,
-            lastName: document.forms["laForm"].elements['lastName'].value,
-            firstName: document.forms["laForm"].elements['firstName'].value,
-            company: document.forms["laForm"].elements['company'].value,
-            position: document.forms["laForm"].elements['position'].value,
-        }));
+        else {
+            var http = new XMLHttpRequest();
+            var url = "/client";
+            http.open("PUT", url, true);
+            var token = 'Bearer ' + window.localStorage.getItem("token");
+            if (window.localStorage.getItem("token")) http.setRequestHeader("Authorization", token)
+            http.setRequestHeader("Content-type", "application/json");
+            http.setRequestHeader("Accept", "application/json");
+            http.onreadystatechange = function () {
+                if (http.readyState == 4 && http.status == 200) {
+                    editDialog.close();
+                }
+                else if (http.readyState == 4 && http.status == 401) {
+
+                }
+            }
+            http.send(JSON.stringify({
+                _id: clients[currentClient]._id,
+                lastName: document.forms["editForm"].elements['lastName'].value,
+                firstName: document.forms["editForm"].elements['firstName'].value,
+                company: document.forms["editForm"].elements['company'].value,
+                position: document.forms["editForm"].elements['position'].value,
+            }));
+        }
     }
     function deleteClient(i) {
         var http = new XMLHttpRequest();
@@ -235,8 +242,6 @@ var clients = (function () {
         http.send();
     }
     function addClientDialog() {
-        document.getElementById("edit").style.display = "none";
-        document.getElementById("add").style.display = "block";
         showDialog();
     }
     function showDialog() {
@@ -245,12 +250,14 @@ var clients = (function () {
         }
         else dialog.showModal();
     }
-
+    function showEditDialog() {
+        if (!dialog.showModal) {
+            dialogPolyfill.registerDialog(editDialog);
+        }
+        else editDialog.showModal();
+    }
     function resetForm() {
-        document.forms["laForm"].elements['lastName'].value = "";
-        document.forms["laForm"].elements['firstName'].value = "";
-        document.forms["laForm"].elements['company'].value = "";
-        document.forms["laForm"].elements['position'].value = "";
+        document.forms["laForm"].reset();
     }
     function reset() {
         var element = document.getElementById("main");
@@ -275,6 +282,9 @@ var clients = (function () {
         dialog.close();
         resetForm();
     }
-
+    function cancelEdit() {
+        document.forms["editForm"].reset();
+        editDialog.close();
+    }
 })()
 
