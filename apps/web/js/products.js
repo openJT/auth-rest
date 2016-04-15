@@ -1,6 +1,6 @@
 var products = (function () {
     'use strict';
-    var products, productDetail;
+    var products, productDetail = {};
     var dialog = document.querySelector('#productDialog');
     var socket = io('/admin', { 'query': 'token=' + window.localStorage.getItem("token") });
     var snackbarContainer = document.querySelector('#toast');
@@ -14,6 +14,7 @@ var products = (function () {
         products.forEach(function (t, i) {
             if (t._id === product._id) {
                 products.splice(i, 1);
+                if (product._id === productDetail._id) clearDetails();
                 drawTable();
                 toast({ message: product.name + " deleted!" });
             }
@@ -138,6 +139,10 @@ var products = (function () {
             }
         }
         http.send();
+    }
+    function clearDetails() {
+        var element = document.getElementById("productDetails");
+        element.innerHTML = "";
     }
     function drawDetails() {
         var element = document.getElementById("productDetails");
