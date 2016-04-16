@@ -53,7 +53,7 @@ angular.module("app", ['ui.router', 'ngAnimate', 'ngResource', 'ngMaterial', 'ng
             }
         };
     })
-    .run(function ($rootScope, Auth) {
+    .run(function ($rootScope, Auth, $window,$location) {
         $window.ga('create', 'UA-66586606-5', 'auto');
 
         $rootScope.$on('$stateChangeSuccess', function () {
