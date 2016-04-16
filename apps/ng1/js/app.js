@@ -42,7 +42,7 @@ angular.module("app", ['ui.router', 'ngAnimate', 'ngResource', 'ngMaterial', 'ng
             // Intercept 401s and redirect you to login
             responseError: function (response) {
                 if (response.status === 401) {
-                    if($location.url()!=='/ng1/')$location.path('/');
+                    if ($location.url() !== '/ng1/') $location.path('/');
                     // remove any stale tokens
                     window.localStorage.removeItem("token");
                     return $q.reject(response);
@@ -54,6 +54,11 @@ angular.module("app", ['ui.router', 'ngAnimate', 'ngResource', 'ngMaterial', 'ng
         };
     })
     .run(function ($rootScope, Auth) {
+        $window.ga('create', 'UA-66586606-5', 'auto');
+
+        $rootScope.$on('$stateChangeSuccess', function () {
+            $window.ga('send', 'pageview', $location.path());
+        });
         $rootScope.$on('$stateChangeStart', function (event, toState) {
             if (toState.authenticate) {
                 if (!Auth.isLoggedIn()) {
