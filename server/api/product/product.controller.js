@@ -1,6 +1,5 @@
 'use strict';
 
-var passport = require('passport');
 var Product = require('./product.model');
 var socket;
 

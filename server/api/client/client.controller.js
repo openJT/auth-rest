@@ -1,6 +1,5 @@
 'use strict';
 
-var passport = require('passport');
 var _ = require('lodash');
 var Client = require('./client.model');
 var socket;
