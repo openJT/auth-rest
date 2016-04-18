@@ -1,6 +1,6 @@
 'use strict';
 angular.module("app")
-    .controller('DialogCtrl', function($mdDialog, clientStorage, rest) {
+    .controller('DialogCtrl', function($mdDialog, clientStorage, clients) {
         var vm = this;
         vm.client = {};
         Object.assign(vm.client, clientStorage.getClient());
@@ -15,8 +15,8 @@ angular.module("app")
             $mdDialog.cancel();
         };
         vm.save = function() {
-            if (vm.edit) rest.updateClient(vm.client);
-            else rest.saveClient(vm.client);
+            if (vm.edit) clients.updateClient(vm.client);
+            else clients.saveClient(vm.client);
 
             $mdDialog.hide();
         };

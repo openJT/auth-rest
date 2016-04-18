@@ -10,7 +10,7 @@ angular.module('app')
                     email: vm.user.email,
                     password: vm.user.password
                 }).then(function () {
-                    $state.go('main');
+                    $state.go('main.clients');
                 }).catch(function (err) {
                         vm.errors.other = err.message;
                     });

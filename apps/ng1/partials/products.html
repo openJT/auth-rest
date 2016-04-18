@@ -1,0 +1,62 @@
+<div layout="column">
+    <div layout="row" layout-align="end">
+        <md-button class="md-fab md-warn" ng-click="ctrl.reset()">
+            <md-icon md-svg-icon="material-icons/ic_refresh_48px.svg" aria-label="Add client">
+                <md-tooltip md-direction="left">Reset data</md-tooltip>
+            </md-icon>
+        </md-button>
+    </div>
+    <div layout="column" layout-gt-sm="row" flex>
+        <md-card layout="column" style="margin:20px" flex>
+            <div layout="row" layout-align="space-between center">
+                <div style="margin:10px">Products</div>
+                <md-button ng-click="ctrl.addProduct($event)" class="md-icon-button launch">
+                    <md-icon md-svg-icon="material-icons/ic_add_48px.svg"></md-icon>
+                    <md-tooltip md-direction="left">Add a product</md-tooltip>
+                </md-button>
+            </div>
+            <md-divider></md-divider>
+            <div layout="column" style="margin:20px 0 20px 20px">
+                <div layout="column" style="margin:5px" ng-repeat="product in ctrl.products">
+                    <div layout="row" layout-align="space-between">
+                        <div>
+                            {{product.name}}
+                        </div>
+                        <div>
+                            <md-button ng-click="ctrl.getProductDetails(product._id)" class="md-icon-button launch">
+                                <md-icon md-svg-icon="material-icons/ic_info_outline_24px.svg"></md-icon>
+                                <md-tooltip md-direction="left">Get details</md-tooltip>
+                            </md-button>
+                            <md-button ng-click="ctrl.deleteProduct(product._id)" class="md-icon-button launch">
+                                <md-icon md-svg-icon="material-icons/ic_delete_24px.svg"></md-icon>
+                                <md-tooltip md-direction="left">Delete product</md-tooltip>
+                            </md-button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </md-card>
+        <md-card layout="column" style="margin:20px" flex>
+            <div layout="row" layout-align="space-between center">
+                <div style="margin:10px">Details</div>
+                <md-button ng-disabled="!ctrl.edit" ng-click="ctrl.editProduct($event)" class="md-icon-button launch">
+                    <md-icon md-svg-icon="material-icons/ic_edit_24px.svg"></md-icon>
+                    <md-tooltip md-direction="left">Edit product</md-tooltip>
+                </md-button>
+            </div>
+            <md-divider></md-divider>
+            <div ng-if="ctrl.edit" layout="column" style="margin:20px">
+                <div style="margin:2px">Name: {{ctrl.details.name}}</div>
+                <div style="margin:2px">Price: {{ctrl.details.price}}</div>
+                <div style="margin:2px">Quantity: {{ctrl.details.quantity}}</div>
+                <div style="margin:2px">Brand: {{ctrl.details.brand}}</div>
+                <div style="margin:2px">Model: {{ctrl.details.model}}</div>
+                <div style="margin:2px">Origin: {{ctrl.details.origin}}</div>
+                <div style="margin:2px">Returnable: {{ctrl.details.returnable}}</div>
+                <div style="margin:2px">Rating: {{ctrl.details.rating}}</div>
+                <div style="margin:2px">Description: {{ctrl.details.description}}</div>
+            </div>
+        </md-card>
+    </div>
+
+</div>

@@ -5,6 +5,10 @@ html body {
     margin: 0;
 }
 
+.active {
+    border-bottom: 5px solid #FF4081
+}
+
 .over:hover {
     background-color: #C8C8C8;
 }
@@ -24,6 +28,7 @@ html body {
 md-input-container.md-input-invalid > label {
     color: red;
 }
+
 
 /* Small Devices, Tablets */
 

@@ -1,5 +1,6 @@
 'use strict';
 
+var _ = require('lodash');
 var Product = require('./product.model');
 var socket;
 
@@ -31,6 +32,21 @@ exports.create = function (req, res) {
     });
 };
 
+// Updates an existing product in the DB.
+exports.update = function (req, res) {
+    console.log(req.body);
+    Product.findById(req.body._id, function (err, product) {
+        if (req.body._id) { delete req.body._id; }
+        if (err) { return handleError(err); }
+        if (!product) { return res.send(404); }
+        var updated = _.merge(product, req.body);
+        updated.save(function (err, product) {
+            if (err) { return handleError(err); }
+            socket.of('/admin').emit('updateProduct', product);
+            return res.status(200).json()
+        });
+    });
+};
 // Deletes a product from the DB.
 exports.destroy = function (req, res) {
     Product.findById(req.params.id, function (err, product) {

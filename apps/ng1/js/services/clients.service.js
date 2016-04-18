@@ -1,22 +1,21 @@
 'use strict';
 angular.module('my.services')
-    .factory('rest', function ($timeout, $rootScope, $state, $http, $q, socket, $mdToast) {
+    .factory('clients', function ($timeout, $rootScope, $state, $http, $q, socket, $mdToast) {
         var clients = [];
         var socket = socket.get();
         var showSimpleToast = function (msg) {
             $mdToast.show(
                 $mdToast.simple()
-                .position("bottom right")
+                    .position("bottom right")
                     .textContent(msg)
                     .hideDelay(2000)
             );
         };
-        $http({ url: '/client', method: 'GET' })
-            .success(function (data) {
-                clients = data;
-            })
-            .error(function (data, status, headers, config) { });
 
+        socket.on('init', function (data) {
+            clients = data.clients;
+            $rootScope.$apply();
+        });
         socket.on('addClient', function (client) {
             clients.push(client);
             showSimpleToast(client.firstName + " " + client.lastName + " was added!");

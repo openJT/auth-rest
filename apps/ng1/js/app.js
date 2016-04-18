@@ -13,19 +13,34 @@ angular.module("app", ['ui.router', 'ngAnimate', 'ngResource', 'ngMaterial', 'ng
                 }
             })
             .state('main', {
-                url: '/ng1/clients/',
                 authenticate: true,
                 views: {
                     "header@": {
                         templateUrl: 'ng1/partials/header.html',
-                        controller: 'mainCtrl as ctrl'
-                    },
-                    "main@": {
-                        templateUrl: 'ng1/partials/main.html',
-                        controller: 'mainCtrl as ctrl'
+                        controller: 'headerCtrl as ctrl'
                     }
                 }
-            });
+            })
+            .state('main.clients', {
+                url: '/ng1/clients/',
+                authenticate: true,
+                views: {
+                    "main@": {
+                        templateUrl: 'ng1/partials/clients.html',
+                        controller: 'clientsCtrl as ctrl'
+                    }
+                }
+            })
+            .state('main.products', {
+                url: '/ng1/products/',
+                authenticate: true,
+                views: {
+                    "main@": {
+                        templateUrl: 'ng1/partials/products.html',
+                        controller: 'productsCtrl as ctrl'
+                    }
+                }
+            });;
         $urlRouterProvider.otherwise('/ng1/');
         $locationProvider.html5Mode(true);
         $httpProvider.interceptors.push('authInterceptor');
@@ -53,7 +68,7 @@ angular.module("app", ['ui.router', 'ngAnimate', 'ngResource', 'ngMaterial', 'ng
             }
         };
     })
-    .run(function ($rootScope, Auth, $window,$location) {
+    .run(function ($rootScope, Auth, $window, $location) {
         $window.ga('create', 'UA-66586606-5', 'auto');
 
         $rootScope.$on('$stateChangeSuccess', function () {

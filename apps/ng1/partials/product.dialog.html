@@ -1,0 +1,52 @@
+<md-dialog flex-sm="100" flex-md="80" flex-lg="80" flex-gt-lg="40">
+    <md-content>
+        <form name="form" layout="column" class="dialog">
+            <div ng-if="!ctrl.edit" style="padding:10px">Add product</div>
+            <div ng-if="ctrl.edit" style="padding:10px">Edit product</div>
+            <md-divider></md-divider>
+            <div style="padding: 10px">
+                <md-input-container>
+                    <label>Name (required)</label>
+                    <input ng-model="ctrl.product.name" name="name" required="true">
+                </md-input-container>
+                <md-input-container style="">
+                    <label>Price</label>
+                    <input ng-model="ctrl.product.price" name="price">
+                </md-input-container>
+                <md-input-container>
+                    <label>Quantity</label>
+                    <input ng-model="ctrl.product.quantity">
+                </md-input-container>
+                <md-input-container>
+                    <label>Brand</label>
+                    <input ng-model="ctrl.product.brand">
+                </md-input-container>
+                <md-input-container>
+                    <label>Model</label>
+                    <input ng-model="ctrl.product.model">
+                </md-input-container>
+                <md-input-container>
+                    <label>Origin</label>
+                    <input ng-model="ctrl.product.origin">
+                </md-input-container>
+                <md-input-container>
+                    <label>Returnable</label>
+                    <input ng-model="ctrl.product.returnable">
+                </md-input-container>
+                <md-input-container>
+                    <label>Rating</label>
+                    <input ng-model="ctrl.product.rating">
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>Description</label>
+                    <textarea ng-model="ctrl.product.description" md-maxlength="150"></textarea>
+                </md-input-container>
+            </div>
+            <md-divider></md-divider>
+            <div layout="row" layout-align="end end">
+                <md-button ng-click="ctrl.cancel()">Cancel</md-button>
+                <md-button ng-click="ctrl.save()" ng-disabled="!form.$dirty || !form.$valid">Save</md-button>
+            </div>
+        </form>
+    </md-content>
+</md-dialog>
