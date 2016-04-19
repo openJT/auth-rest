@@ -1,5 +1,4 @@
-
-var draw = (function () {
+var draw = (function (Global) {
     'use strict';
 
     return {
@@ -42,7 +41,7 @@ var draw = (function () {
                 row.appendChild(child4);
 
                 var child5 = document.createElement("div");
-                child5.onclick = function () { editClient(i) };
+                child5.onclick = function () { Global.clients.editClient(i) };
                 child5.className += " flex-item";
 
                 var child6 = document.createElement("img");
@@ -52,7 +51,7 @@ var draw = (function () {
                 row.appendChild(child5);
 
                 var child7 = document.createElement("div");
-                child7.onclick = function () { deleteClient(i) };
+                child7.onclick = function () { Global.clients.deleteClient(i) };
                 child7.className += " flex-item";
 
                 var child8 = document.createElement("img");
@@ -85,14 +84,14 @@ var draw = (function () {
                 row.appendChild(child2);
 
                 var child3 = document.createElement("img");
-                child3.onclick = function () { getDetails(products[i]._id) };
+                child3.onclick = function () { Global.rest.getDetails(products[i]._id) };
                 child3.src = "material-icons/ic_info_outline_24px.svg";
                 child3.style.cursor = "pointer";
                 child2.appendChild(child3);
                 element.appendChild(row);
 
                 var child4 = document.createElement("img");
-                child4.onclick = function () { deleteProduct(products[i]._id) };
+                child4.onclick = function () { Global.products.deleteProduct(i) };
                 child4.src = "material-icons/ic_delete_24px.svg";
                 child4.style.cursor = "pointer";
                 child4.style.marginLeft = "20px";
@@ -164,4 +163,4 @@ var draw = (function () {
         row.appendChild(child9);
         element.appendChild(row);
     }
-})()
+})(this)

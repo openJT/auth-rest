@@ -1,5 +1,4 @@
-
-var clients = (function () {
+var clients = (function (Global) {
     'use strict';
     var clients = [], message, currentClient;
     var dialog = document.querySelector('#dialog');
@@ -57,9 +56,11 @@ var clients = (function () {
         saveClient: saveClient,
         addClientDialog: addClientDialog,
         editClient: editClient,
+        deleteClient: deleteClient,
         getData: getData,
         cancel: cancel,
         cancelEdit: cancelEdit,
+        resetForm: resetForm,
         reset: reset,
         updateClient: updateClient
     }
@@ -101,30 +102,9 @@ var clients = (function () {
             snackbarContainer.MaterialSnackbar.showSnackbar(data);
 
         }
-        else if (document.getElementById("add").style.display === "none") updateClient();
-        else addClient();
+        else Global.rest.addClient();
     }
-    function addClient() {
-        var http = new XMLHttpRequest();
-        var url = "/client";
-        http.open("POST", url, true);
-        var token = 'Bearer ' + window.localStorage.getItem("token");
-        if (window.localStorage.getItem("token")) http.setRequestHeader("Authorization", token)
-        http.setRequestHeader("Content-type", "application/json");
-        http.setRequestHeader("Accept", "application/json");
-        http.onreadystatechange = function () {
-            if (http.readyState == 4 && http.status == 201) {
-                dialog.close();
-                resetForm();
-            }
-        }
-        http.send(JSON.stringify({
-            lastName: document.forms["laForm"].elements['lastName'].value,
-            firstName: document.forms["laForm"].elements['firstName'].value,
-            company: document.forms["laForm"].elements['company'].value,
-            position: document.forms["laForm"].elements['position'].value
-        }));
-    }
+
 
     function updateClient() {
         if (
@@ -134,45 +114,10 @@ var clients = (function () {
             var data = { message: 'Please fill all required fields' };
             snackbarContainer.MaterialSnackbar.showSnackbar(data);
         }
-        else {
-            var http = new XMLHttpRequest();
-            var url = "/client";
-            http.open("PUT", url, true);
-            var token = 'Bearer ' + window.localStorage.getItem("token");
-            if (window.localStorage.getItem("token")) http.setRequestHeader("Authorization", token)
-            http.setRequestHeader("Content-type", "application/json");
-            http.setRequestHeader("Accept", "application/json");
-            http.onreadystatechange = function () {
-                if (http.readyState == 4 && http.status == 200) {
-                    editDialog.close();
-                }
-                else if (http.readyState == 4 && http.status == 401) {
-
-                }
-            }
-            http.send(JSON.stringify({
-                _id: clients[currentClient]._id,
-                lastName: document.forms["editForm"].elements['lastName'].value,
-                firstName: document.forms["editForm"].elements['firstName'].value,
-                company: document.forms["editForm"].elements['company'].value,
-                position: document.forms["editForm"].elements['position'].value,
-            }));
-        }
+        else Global.rest.updateClient(clients[currentClient]._id);
     }
     function deleteClient(i) {
-        var http = new XMLHttpRequest();
-        var url = "/client/" + clients[i]._id;
-        http.open("DELETE", url, true);
-        var token = 'Bearer ' + window.localStorage.getItem("token");
-        if (window.localStorage.getItem("token")) http.setRequestHeader("Authorization", token)
-        http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        http.setRequestHeader("Accept", "application/json");
-        http.onreadystatechange = function () {
-            if (http.readyState == 4 && http.status == 204) {
-
-            }
-        }
-        http.send();
+        Global.rest.deleteClient(clients[i]._id);
     }
     function addClientDialog() {
         showDialog();
@@ -229,5 +174,4 @@ var clients = (function () {
         document.forms["editForm"].reset();
         editDialog.close();
     }
-})()
-
+})(this)
