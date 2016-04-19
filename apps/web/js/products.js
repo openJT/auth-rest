@@ -7,7 +7,7 @@ var products = (function () {
 
     socket.on('addProduct', function (product) {
         products.push(product);
-        drawTable();
+        draw.productsTable(products);
         toast({ message: product.name + " added!" });
     });
     socket.on('deleteProduct', function (product) {
@@ -15,7 +15,7 @@ var products = (function () {
             if (t._id === product._id) {
                 products.splice(i, 1);
                 if (product._id === productDetail._id) clearDetails();
-                drawTable();
+                draw.productsTable(products);
                 toast({ message: product.name + " deleted!" });
             }
         });
@@ -24,7 +24,7 @@ var products = (function () {
         products.forEach(function (t, i) {
             if (t._id === product._id) {
                 products[i] = product;
-                drawTable();
+                draw.productsTable(products);
                 toast({ message: product.name + " updated!" });
             }
         });
@@ -40,7 +40,7 @@ var products = (function () {
         http.onreadystatechange = function () {
             if (http.readyState == 4 && http.status == 200) {
                 products = JSON.parse(http.responseText);
-                drawTable();
+                draw.productsTable(products);
                 toast({ message: "Data reset!" });
             }
             else if (http.readyState == 4 && http.status == 401) {
@@ -73,7 +73,7 @@ var products = (function () {
         http.onreadystatechange = function () {
             if (http.readyState == 4 && http.status == 200) {
                 products = JSON.parse(http.responseText);
-                drawTable();
+                draw.productsTable(products);
             }
             else if (http.readyState == 4 && http.status == 401) {
                 window.localStorage.removeItem("token");
@@ -83,42 +83,7 @@ var products = (function () {
         http.send();
     }
 
-    function drawTable() {
-        var element = document.getElementById("productList");
-        element.innerHTML = "";
-        for (var i = 0; i < products.length; i++) {
-            (function (i) {
-                var row = document.createElement("div");
-                row.className = "flex-item";
-                row.className += " row";
-                row.className += " over";
-                row.style.padding = "2px";
-                var child = document.createElement("div");
-                child.className = "flex-item"
-                child.innerHTML = products[i].name;
-                row.appendChild(child);
 
-                var child2 = document.createElement("div");
-                child2.className = "flex-item jEnd"
-                row.appendChild(child2);
-
-                var child3 = document.createElement("img");
-                child3.onclick = function () { getDetails(products[i]._id) };
-                child3.src = "material-icons/ic_info_outline_24px.svg";
-                child3.style.cursor = "pointer";
-                child2.appendChild(child3);
-                element.appendChild(row);
-
-                var child4 = document.createElement("img");
-                child4.onclick = function () { deleteProduct(products[i]._id) };
-                child4.src = "material-icons/ic_delete_24px.svg";
-                child4.style.cursor = "pointer";
-                child4.style.marginLeft = "20px";
-                child2.appendChild(child4);
-                element.appendChild(row);
-            })(i)
-        }
-    }
     function getDetails(id) {
         var http = new XMLHttpRequest();
         var url = "/product/" + id;
@@ -130,7 +95,7 @@ var products = (function () {
         http.onreadystatechange = function () {
             if (http.readyState == 4 && http.status == 200) {
                 productDetail = JSON.parse(http.responseText);
-                drawDetails();
+                draw.productDetails(productDetail);
             }
             else if (http.readyState == 4 && http.status == 401) {
                 window.localStorage.removeItem("token");
@@ -143,69 +108,7 @@ var products = (function () {
         var element = document.getElementById("productDetails");
         element.innerHTML = "";
     }
-    function drawDetails() {
-        var element = document.getElementById("productDetails");
-        element.innerHTML = "";
 
-        var row = document.createElement("div");
-        row.className = "flex";
-        row.className += " column";
-        row.style.margin = "2px";
-
-        var child = document.createElement("div");
-        child.className = "flex-item"
-        child.innerHTML = "Name: " + productDetail.name;
-        row.appendChild(child);
-        element.appendChild(row);
-
-        var child2 = document.createElement("div");
-        child2.className = "flex-item"
-        child2.innerHTML = "Price: " + productDetail.price;
-        row.appendChild(child2);
-        element.appendChild(row);
-
-        var child3 = document.createElement("div");
-        child3.className = "flex-item"
-        child3.innerHTML = "Quantity: " + productDetail.quantity;
-        row.appendChild(child3);
-        element.appendChild(row);
-
-        var child4 = document.createElement("div");
-        child4.className = "flex-item"
-        child4.innerHTML = "Brand: " + productDetail.brand;
-        row.appendChild(child4);
-        element.appendChild(row);
-
-        var child5 = document.createElement("div");
-        child5.className = "flex-item"
-        child5.innerHTML = "Model: " + productDetail.model;
-        row.appendChild(child5);
-        element.appendChild(row);
-
-        var child6 = document.createElement("div");
-        child6.className = "flex-item"
-        child6.innerHTML = "Origin: " + productDetail.origin;
-        row.appendChild(child6);
-        element.appendChild(row);
-
-        var child7 = document.createElement("div");
-        child7.className = "flex-item"
-        child7.innerHTML = "Returnable: " + productDetail.returnable;
-        row.appendChild(child7);
-        element.appendChild(row);
-
-        var child8 = document.createElement("div");
-        child8.className = "flex-item"
-        child8.innerHTML = "Rating: " + productDetail.rating;
-        row.appendChild(child8);
-        element.appendChild(row);
-
-        var child9 = document.createElement("div");
-        child9.className = "flex-item"
-        child9.innerHTML = "Description: " + productDetail.description;
-        row.appendChild(child9);
-        element.appendChild(row);
-    }
     function addProductDialog() {
         showDialog();
     }
@@ -305,4 +208,5 @@ var products = (function () {
         window.localStorage.removeItem("token");
         window.location.assign('/');
     }
+
 })()

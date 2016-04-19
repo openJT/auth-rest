@@ -9,14 +9,14 @@ var clients = (function () {
 
     socket.on('addClient', function (client) {
         clients.push(client);
-        drawTable();
+        draw.clientsTable(clients);
         toast({ message: client.firstName + " " + client.lastName + " was added!" });
     });
     socket.on('deleteClient', function (client) {
         clients.forEach(function (t, i) {
             if (t._id === client._id) {
                 clients.splice(i, 1);
-                drawTable();
+                draw.clientsTable(clients);
                 toast({ message: client.firstName + " " + client.lastName + " was deleted!" });
             }
         });
@@ -25,7 +25,7 @@ var clients = (function () {
         clients.forEach(function (t, i) {
             if (t._id === client._id) {
                 clients[i] = client;
-                drawTable();
+                draw.clientsTable(clients);
                 toast({ message: client.firstName + " " + client.lastName + " was updated!" });
             }
         });
@@ -41,7 +41,7 @@ var clients = (function () {
         http.onreadystatechange = function () {
             if (http.readyState == 4 && http.status == 200) {
                 clients = JSON.parse(http.responseText);
-                drawTable();
+                draw.clientsTable(clients);
                 toast({ message: "Data reset!" });
             }
             else if (http.readyState == 4 && http.status == 401) {
@@ -56,7 +56,7 @@ var clients = (function () {
         logout: logout,
         saveClient: saveClient,
         addClientDialog: addClientDialog,
-        drawTable: drawTable,
+        editClient: editClient,
         getData: getData,
         cancel: cancel,
         cancelEdit: cancelEdit,
@@ -78,7 +78,7 @@ var clients = (function () {
         http.onreadystatechange = function () {
             if (http.readyState == 4 && http.status == 200) {
                 clients = JSON.parse(http.responseText);
-                drawTable();
+                draw.clientsTable(clients);
             }
             else if (http.readyState == 4 && http.status == 401) {
                 window.localStorage.removeItem("token");
@@ -87,64 +87,7 @@ var clients = (function () {
         }
         http.send();
     }
-    function drawTable() {
-        var element = document.getElementById("main");
-        element.innerHTML = "";
-        for (var i = 0; i < clients.length; i++) {
-            (function (i) {
-                var row = document.createElement("div");
-                row.className = "flex";
-                row.className += " row";
-                row.className += " over";
 
-                var child = document.createElement("div");
-                child.className = "flex-item"
-                row.className += " aCenter";
-                child.innerHTML = clients[i].lastName;
-                row.appendChild(child);
-
-                var child2 = document.createElement("div");
-                child2.className = "flex-item";
-                child2.className += " hideColumnSmall";
-                child2.innerHTML = clients[i].firstName;
-                row.appendChild(child2);
-
-                var child3 = document.createElement("div");
-                child3.className = "flex-item";
-                child3.className += " hideColumn";
-                child3.innerHTML = clients[i].company;
-                row.appendChild(child3);
-
-                var child4 = document.createElement("div");
-                child4.className = "flex-item";
-                child4.className += " hideColumn";
-                child4.innerHTML = clients[i].position;
-                row.appendChild(child4);
-
-                var child5 = document.createElement("div");
-                child5.onclick = function () { editClient(i) };
-                child5.className += " flex-item";
-
-                var child6 = document.createElement("img");
-                child6.src = "material-icons/ic_edit_24px.svg";
-                child6.style.cursor = "pointer";
-                child5.appendChild(child6);
-                row.appendChild(child5);
-
-                var child7 = document.createElement("div");
-                child7.onclick = function () { deleteClient(i) };
-                child7.className += " flex-item";
-
-                var child8 = document.createElement("img");
-                child8.src = "material-icons/ic_delete_24px.svg";
-                child8.style.cursor = "pointer";
-                child7.appendChild(child8);
-
-                row.appendChild(child7);
-                element.appendChild(row);
-            })(i)
-        }
-    }
     function logout() {
         window.localStorage.removeItem("token");
         window.location.assign('/');
@@ -182,17 +125,7 @@ var clients = (function () {
             position: document.forms["laForm"].elements['position'].value
         }));
     }
-    function editClient(i) {
-        currentClient = i;
-        showEditDialog();
-        setTimeout(function () {
-            document.forms["editForm"].elements['lastName'].value = clients[i].lastName;
-            document.forms["editForm"].elements['firstName'].value = clients[i].firstName;
-            document.forms["editForm"].elements['company'].value = clients[i].company;
-            document.forms["editForm"].elements['position'].value = clients[i].position;
-        }, 0)
 
-    }
     function updateClient() {
         if (
             document.forms["editForm"].elements['lastName'].value === '' ||
@@ -243,6 +176,16 @@ var clients = (function () {
     }
     function addClientDialog() {
         showDialog();
+    }
+    function editClient(i) {
+        currentClient = i;
+        showEditDialog();
+        setTimeout(function () {
+            document.forms["editForm"].elements['lastName'].value = clients[i].lastName;
+            document.forms["editForm"].elements['firstName'].value = clients[i].firstName;
+            document.forms["editForm"].elements['company'].value = clients[i].company;
+            document.forms["editForm"].elements['position'].value = clients[i].position;
+        }, 0)
     }
     function showDialog() {
         if (!dialog.showModal) {
