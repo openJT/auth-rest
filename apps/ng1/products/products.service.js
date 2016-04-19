@@ -1,6 +1,10 @@
-'use strict';
-angular.module('my.services')
-    .factory('products', function ($timeout, $rootScope, $state, $http, $q, socket, $mdToast) {
+(function () {
+    'use strict';
+    angular
+        .module('products')
+        .factory('products', products);
+
+    function products($timeout, $rootScope, $state, $http, $q, socket, $mdToast) {
         var products = [];
         var details = {};
         var socket = socket.get();
@@ -15,7 +19,6 @@ angular.module('my.services')
 
         socket.on('init', function (data) {
             products = data.products;
-            $rootScope.$apply();
         });
         socket.on('addProduct', function (product) {
             products.push(product);
@@ -46,6 +49,7 @@ angular.module('my.services')
                 })
                 .error(function (data, status, headers, config) { });
         });
+        
         return {
             getProducts: function () {
                 return products;
@@ -84,4 +88,5 @@ angular.module('my.services')
                     .error(function (data, status, headers, config) { });
             }
         }
-    });
+    };
+})()

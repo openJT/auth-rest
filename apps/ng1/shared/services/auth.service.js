@@ -1,6 +1,9 @@
-'use strict';
-angular.module('my.services', [])
-    .factory('Auth', function Auth($rootScope, $http, User, $q, $location) {
+(function () {
+    'use strict';
+    angular
+        .module('app')
+        .factory('Auth', Auth);
+    function Auth($rootScope, $http, User, $q, $location) {
         var currentUser = {};
         return {
             /**
@@ -57,4 +60,5 @@ angular.module('my.services', [])
                 if ($location.url() !== '/ng1/') window.location.assign('/');
             }
         };
-    });
+    };
+})()

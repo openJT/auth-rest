@@ -1,0 +1,14 @@
+<md-toolbar layout="row" layout-align="space-between" style="background-color: #474747;outline:none" flex>
+    <h3 style="margin:auto 30px auto 30px;font-weight: 900;font-size: 1.5em" class="hideColumn">
+        Angular
+    </h3>
+    <div layout="row" layout-align="start end" flex>
+        <div ng-class="ctrl.clients" style="text-decoration:none" ui-sref="main.clients"><h6 style="margin: auto 25px 10px 25px;color:white">Clients</h6></div>
+        <div ng-class="ctrl.products" style="text-decoration:none" ui-sref="main.products"><h6 style="margin: auto 25px 10px 25px;color:white">Products</h6></div>
+    </div>
+    <div layout="row" layout-align="center" style="margin-right: 30px;cursor: pointer">
+        <md-icon md-svg-icon="/material-icons/ic_exit_to_app_48px.svg" aria-label="Logout" ng-click="ctrl.logout()">
+            <md-tooltip md-direction="left">Exit</md-tooltip>
+        </md-icon>
+    </div>
+</md-toolbar>

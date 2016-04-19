@@ -1,7 +1,10 @@
-'use strict';
-angular.module('app')
-    .controller('loginCtrl', function (Auth, $state) {
-        var vm =this;
+(function () {
+    'use strict';
+    angular
+        .module('app')
+        .controller('LoginCtrl', LoginCtrl);
+    function LoginCtrl(Auth, $state) {
+        var vm = this;
         vm.errors = {};
         vm.login = function (form) {
             vm.submitted = true;
@@ -12,8 +15,9 @@ angular.module('app')
                 }).then(function () {
                     $state.go('main.clients');
                 }).catch(function (err) {
-                        vm.errors.other = err.message;
-                    });
+                    vm.errors.other = err.message;
+                });
             }
         };
-    });
+    };
+})()

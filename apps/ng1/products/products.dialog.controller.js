@@ -1,12 +1,15 @@
-'use strict';
-angular.module("app")
-    .controller('productsDialogCtrl', function ($scope, $mdSidenav, products, $mdDialog) {
+(function () {
+    'use strict';
+    angular
+        .module('products')
+        .controller('ProductsDialogCtrl', ProductsDialogCtrl);
+    function ProductsDialogCtrl($scope, $mdSidenav, products, $mdDialog) {
         var vm = this;
         vm.edit = false
         vm.product = {};
         var temp = products.getDetails();
         angular.copy(temp, vm.product);
-        // vm.product = products.getDetails();
+
         if (vm.product.hasOwnProperty('name')) vm.edit = true;
         vm.cancel = function () {
             $mdDialog.cancel();
@@ -20,4 +23,5 @@ angular.module("app")
         vm.reset = function () {
             products.resetData();
         };
-    });
+    };
+})()

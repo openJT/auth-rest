@@ -1,6 +1,9 @@
-'use strict';
-angular.module("app")
-    .controller('productsCtrl', function ($scope, $mdSidenav, products, $mdDialog, Auth) {
+(function () {
+    'use strict';
+    angular
+        .module('products')
+        .controller('ProductsCtrl', ProductsCtrl);
+    function ProductsCtrl($scope, $mdSidenav, products, $mdDialog, Auth) {
         var vm = this;
         vm.products = [];
         vm.details = {};
@@ -39,21 +42,12 @@ angular.module("app")
             vm.showDialog(ev);
         };
         vm.editProduct = function (ev) {
-            vm.showEditDialog(ev);
+            vm.showDialog(ev);
         };
         vm.showDialog = function (ev) {
             $mdDialog.show({
-                controller: 'productsDialogCtrl as ctrl',
-                templateUrl: 'ng1/partials/product.dialog.html',
-                parent: angular.element(document.body),
-                targetEvent: ev,
-                clickOutsideToClose: true
-            });
-        };
-        vm.showEditDialog = function (ev) {
-            $mdDialog.show({
-                controller: 'productsDialogCtrl as ctrl',
-                templateUrl: 'ng1/partials/product.dialog.html',
+                controller: 'ProductsDialogCtrl as ctrl',
+                templateUrl: 'ng1/products/product.dialog.html',
                 parent: angular.element(document.body),
                 targetEvent: ev,
                 clickOutsideToClose: true
@@ -62,13 +56,12 @@ angular.module("app")
         vm.cancel = function () {
             $mdDialog.cancel();
         };
-        vm.save = function () {
-
-        };
         vm.logout = function () {
             Auth.logout();
         };
         vm.reset = function () {
+            products.clearDetails();
             products.resetData();
         };
-    });
+    };
+})()

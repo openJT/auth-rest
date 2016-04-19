@@ -1,6 +1,9 @@
-'use strict';
-angular.module("app")
-    .controller('clientsCtrl', function ($scope, $mdSidenav, clients, products, clientStorage, $mdDialog, Auth) {
+(function () {
+    'use strict';
+    angular
+        .module('clients')
+        .controller('ClientsCtrl', ClientsCtrl);
+    function ClientsCtrl($scope, $mdSidenav, clients, products, $mdDialog, Auth) {
         var vm = this;
         vm.client = [];
 
@@ -17,20 +20,20 @@ angular.module("app")
             $mdSidenav('left').toggle();
         };
         vm.editClient = function (ev, item) {
-            clientStorage.setClient(item);
+            clients.setClient(item);
             vm.showDialog(ev);
         };
         vm.deleteClient = function (item) {
             clients.deleteClient(item);
         };
         vm.addClient = function (ev) {
-            clientStorage.clearClient();
+            clients.clearClient();
             vm.showDialog(ev);
         };
         vm.showDialog = function (ev) {
             $mdDialog.show({
-                controller: 'DialogCtrl as ctrl',
-                templateUrl: 'ng1/partials/clients.dialog.html',
+                controller: 'ClientDialogCtrl as ctrl',
+                templateUrl: 'ng1/clients/clients.dialog.html',
                 parent: angular.element(document.body),
                 targetEvent: ev,
                 clickOutsideToClose: true
@@ -42,4 +45,5 @@ angular.module("app")
         vm.reset = function () {
             clients.resetData();
         };
-    });
+    };
+})();

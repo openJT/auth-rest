@@ -1,7 +1,9 @@
-
-'use strict';
-angular.module("app")
-    .controller('headerCtrl', function ($mdSidenav, clients, Auth, $rootScope, $state) {
+(function () {
+    'use strict';
+    angular
+        .module('app')
+        .controller('HeaderCtrl', HeaderCtrl);
+    function HeaderCtrl($mdSidenav, clients, products, Auth, $rootScope, $state) {
         var vm = this;
 
         if ($state.current.name === 'main.clients') {
@@ -12,7 +14,6 @@ angular.module("app")
         }
 
         $rootScope.$on('$stateChangeStart', function (event, toState) {
-            console.log(toState.name);
             if (toState.name === 'main.clients') {
                 vm.clients = ['active']; vm.products = ['inactive'];
             }
@@ -33,4 +34,5 @@ angular.module("app")
         vm.reset = function () {
             clients.resetData();
         };
-    });
+    };
+})()

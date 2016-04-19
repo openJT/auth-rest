@@ -1,7 +1,7 @@
 (function() {
     'use strict';
     angular
-        .module('my.services')
+        .module('app')
         .factory('socket', socket);
     function socket() {
         var socket = io('/admin', { 'query': 'token=' + window.localStorage.getItem("token") });

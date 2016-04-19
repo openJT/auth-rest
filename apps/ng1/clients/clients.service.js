@@ -1,7 +1,11 @@
-'use strict';
-angular.module('my.services')
-    .factory('clients', function ($timeout, $rootScope, $state, $http, $q, socket, $mdToast) {
+(function () {
+    'use strict';
+    angular
+        .module('clients')
+        .factory('clients', clients);
+    function clients($timeout, $rootScope, $state, $http, $q, socket, $mdToast) {
         var clients = [];
+        var client = {};
         var socket = socket.get();
         var showSimpleToast = function (msg) {
             $mdToast.show(
@@ -27,7 +31,6 @@ angular.module('my.services')
                     clients.splice(i, 1);
                 }
             });
-
             showSimpleToast(client.firstName + " " + client.lastName + " was deleted!");
         });
         socket.on('updateClient', function (client) {
@@ -70,6 +73,16 @@ angular.module('my.services')
                 $http({ url: '/reset', method: 'GET' })
                     .success(function () { })
                     .error(function (data, status, headers, config) { });
+            },
+            clearClient: function () {
+                client = {};
+            },
+            setClient: function (item) {
+                client = item;
+            },
+            getClient: function () {
+                return client
             }
         }
-    });
+    };
+})()

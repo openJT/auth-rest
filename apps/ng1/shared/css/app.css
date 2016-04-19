@@ -6,7 +6,12 @@ html body {
 }
 
 .active {
-    border-bottom: 5px solid #FF4081
+    border-bottom: 5px solid #FF4081;
+}
+
+.inactive {
+    border-bottom: 5px solid #474747;
+    cursor: pointer;
 }
 
 .over:hover {
