@@ -30,15 +30,15 @@ module.exports = function (app) {
     app.use(passport.session());
 
     if ('production' === env) {
-        app.use(express.static(path.join(config.root, 'apps')));
-        app.use(express.static(path.join(config.root, 'assets')));
-        app.use(express.static(path.join(config.root, 'node_modules')));
+        app.use('/auth-rest', express.static(path.join(config.root, 'node_modules')));
+        app.use('/auth-rest', express.static(path.join(config.root, 'apps')))
+        app.use('/auth-rest/assets', express.static(path.join(config.root, 'assets')))
     }
 
     if ('development' === env || 'test' === env) {
-        app.use(express.static(path.join(config.root, 'apps')));
-        app.use(express.static(path.join(config.root, 'assets')));
-        app.use(express.static(path.join(config.root, 'node_modules')));
+        app.use('/auth-rest', express.static(path.join(config.root, 'node_modules')));
+        app.use('/auth-rest', express.static(path.join(config.root, 'apps')))
+        app.use('/auth-rest/assets', express.static(path.join(config.root, 'assets')))
         app.use(morgan('dev'));
         app.use(errorHandler());
     }

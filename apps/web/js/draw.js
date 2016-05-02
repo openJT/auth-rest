@@ -45,7 +45,7 @@ var draw = (function (Global) {
                 child5.className += " flex-item";
 
                 var child6 = document.createElement("img");
-                child6.src = "material-icons/ic_edit_24px.svg";
+                child6.src = "/auth-rest/assets/material-icons/ic_edit_24px.svg";
                 child6.style.cursor = "pointer";
                 child5.appendChild(child6);
                 row.appendChild(child5);
@@ -55,7 +55,7 @@ var draw = (function (Global) {
                 child7.className += " flex-item";
 
                 var child8 = document.createElement("img");
-                child8.src = "material-icons/ic_delete_24px.svg";
+                child8.src = "/auth-rest/assets/material-icons/ic_delete_24px.svg";
                 child8.style.cursor = "pointer";
                 child7.appendChild(child8);
 
@@ -85,14 +85,14 @@ var draw = (function (Global) {
 
                 var child3 = document.createElement("img");
                 child3.onclick = function () { Global.rest.getDetails(products[i]._id) };
-                child3.src = "material-icons/ic_info_outline_24px.svg";
+                child3.src = "/auth-rest/assets/material-icons/ic_info_outline_24px.svg";
                 child3.style.cursor = "pointer";
                 child2.appendChild(child3);
                 element.appendChild(row);
 
                 var child4 = document.createElement("img");
                 child4.onclick = function () { Global.products.deleteProduct(i) };
-                child4.src = "material-icons/ic_delete_24px.svg";
+                child4.src = "/auth-rest/assets/material-icons/ic_delete_24px.svg";
                 child4.style.cursor = "pointer";
                 child4.style.marginLeft = "20px";
                 child2.appendChild(child4);

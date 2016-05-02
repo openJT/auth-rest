@@ -20,7 +20,7 @@ var rest = (function (Global) {
         var element = document.getElementById("productDetails");
         element.innerHTML = "";
         var http = new XMLHttpRequest();
-        var url = "/reset";
+        var url = "/auth-rest/reset";
         http.open("GET", url, true);
         var token = 'Bearer ' + window.localStorage.getItem("token");
         if (window.localStorage.getItem("token")) http.setRequestHeader("Authorization", token)
@@ -38,7 +38,7 @@ var rest = (function (Global) {
     //products API
     function deleteProduct(id) {
         var http = new XMLHttpRequest();
-        var url = "/product/" + id;
+        var url = "/auth-rest/product/" + id;
 
         http.open("DELETE", url, true);
         var token = 'Bearer ' + window.localStorage.getItem("token");
@@ -57,7 +57,7 @@ var rest = (function (Global) {
     }
     function saveProduct() {
         var http = new XMLHttpRequest();
-        var url = "/product";
+        var url = "/auth-rest/product";
         http.open("POST", url, true);
         var token = 'Bearer ' + window.localStorage.getItem("token");
         if (window.localStorage.getItem("token")) http.setRequestHeader("Authorization", token)
@@ -84,7 +84,7 @@ var rest = (function (Global) {
     }
     function getDetails(id) {
         var http = new XMLHttpRequest();
-        var url = "/product/" + id;
+        var url = "/auth-rest/product/" + id;
         http.open("GET", url, true);
         var token = 'Bearer ' + window.localStorage.getItem("token");
         http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -106,7 +106,7 @@ var rest = (function (Global) {
     //clients API
     function addClient() {
         var http = new XMLHttpRequest();
-        var url = "/client";
+        var url = "/auth-rest/client";
         http.open("POST", url, true);
         var token = 'Bearer ' + window.localStorage.getItem("token");
         if (window.localStorage.getItem("token")) http.setRequestHeader("Authorization", token)
@@ -128,7 +128,7 @@ var rest = (function (Global) {
 
     function deleteClient(id) {
         var http = new XMLHttpRequest();
-        var url = "/client/" + id;
+        var url = "/auth-rest/client/" + id;
         http.open("DELETE", url, true);
         var token = 'Bearer ' + window.localStorage.getItem("token");
         if (window.localStorage.getItem("token")) http.setRequestHeader("Authorization", token)
@@ -143,7 +143,7 @@ var rest = (function (Global) {
     }
     function updateClient(id) {
         var http = new XMLHttpRequest();
-        var url = "/client";
+        var url = "/auth-rest/client";
         http.open("PUT", url, true);
         var token = 'Bearer ' + window.localStorage.getItem("token");
         if (window.localStorage.getItem("token")) http.setRequestHeader("Authorization", token)

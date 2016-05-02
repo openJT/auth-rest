@@ -3,7 +3,7 @@ var clients = (function (Global) {
     var clients = [], message, currentClient;
     var dialog = document.querySelector('#dialog');
     var editDialog = document.querySelector('#editDialog');
-    var socket = io('/admin', { 'query': 'token=' + window.localStorage.getItem("token") });
+    var socket = io('/admin', { 'query': 'token=' + window.localStorage.getItem("token"), path: '/auth-rest/socket.io' });
     var snackbarContainer = document.querySelector('#toast');
 
     socket.on('addClient', function (client) {
@@ -31,7 +31,7 @@ var clients = (function (Global) {
     });
     socket.on('reset', function (client) {
         var http = new XMLHttpRequest();
-        var url = "/client";
+        var url = "/auth-rest/client";
         http.open("GET", url, true);
         var token = 'Bearer ' + window.localStorage.getItem("token");
         http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -45,7 +45,7 @@ var clients = (function (Global) {
             }
             else if (http.readyState == 4 && http.status == 401) {
                 window.localStorage.removeItem("token");
-                window.location.assign('/web');
+                window.location.assign('/auth-rest/web');
             }
         }
         http.send();
@@ -69,7 +69,7 @@ var clients = (function (Global) {
     }
     function getData() {
         var http = new XMLHttpRequest();
-        var url = "/client";
+        var url = "/auth-rest/client";
 
         http.open("GET", url, true);
         var token = 'Bearer ' + window.localStorage.getItem("token");
@@ -83,7 +83,7 @@ var clients = (function (Global) {
             }
             else if (http.readyState == 4 && http.status == 401) {
                 window.localStorage.removeItem("token");
-                window.location.assign('/web');
+                window.location.assign('/auth-rest/web');
             }
         }
         http.send();
@@ -152,7 +152,7 @@ var clients = (function (Global) {
         element.innerHTML = "";
 
         var http = new XMLHttpRequest();
-        var url = "/reset";
+        var url = "/auth-rest/reset";
         http.open("GET", url, true);
         var token = 'Bearer ' + window.localStorage.getItem("token");
         if (window.localStorage.getItem("token")) http.setRequestHeader("Authorization", token)
@@ -161,7 +161,7 @@ var clients = (function (Global) {
             if (http.readyState == 4 && http.status == 200);
             else if (http.readyState == 4 && http.status == 401) {
                 window.localStorage.removeItem("token");
-                window.location.assign('/web');
+                window.location.assign('/auth-rest/web');
             }
         }
         http.send();

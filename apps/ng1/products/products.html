@@ -1,7 +1,7 @@
 <div layout="column">
     <div layout="row" layout-align="end">
         <md-button class="md-fab md-warn" ng-click="ctrl.reset()">
-            <md-icon md-svg-icon="material-icons/ic_refresh_48px.svg" aria-label="Add client">
+            <md-icon md-svg-icon="/auth-rest/assets/material-icons/ic_refresh_48px.svg" aria-label="Add client">
                 <md-tooltip md-direction="left">Reset data</md-tooltip>
             </md-icon>
         </md-button>
@@ -11,7 +11,7 @@
             <div layout="row" layout-align="space-between center">
                 <div style="margin:10px">Products</div>
                 <md-button ng-click="ctrl.addProduct($event)" class="md-icon-button launch">
-                    <md-icon md-svg-icon="material-icons/ic_add_48px.svg"></md-icon>
+                    <md-icon md-svg-icon="/auth-rest/assets/material-icons/ic_add_48px.svg"></md-icon>
                     <md-tooltip md-direction="left">Add a product</md-tooltip>
                 </md-button>
             </div>
@@ -24,11 +24,11 @@
                         </div>
                         <div>
                             <md-button ng-click="ctrl.getProductDetails(product._id)" class="md-icon-button launch">
-                                <md-icon md-svg-icon="material-icons/ic_info_outline_24px.svg"></md-icon>
+                                <md-icon md-svg-icon="/auth-rest/assets/material-icons/ic_info_outline_24px.svg"></md-icon>
                                 <md-tooltip md-direction="left">Get details</md-tooltip>
                             </md-button>
                             <md-button ng-click="ctrl.deleteProduct(product._id)" class="md-icon-button launch">
-                                <md-icon md-svg-icon="material-icons/ic_delete_24px.svg"></md-icon>
+                                <md-icon md-svg-icon="/auth-rest/assets/material-icons/ic_delete_24px.svg"></md-icon>
                                 <md-tooltip md-direction="left">Delete product</md-tooltip>
                             </md-button>
                         </div>
@@ -40,7 +40,7 @@
             <div layout="row" layout-align="space-between center">
                 <div style="margin:10px">Details</div>
                 <md-button ng-disabled="!ctrl.edit" ng-click="ctrl.editProduct($event)" class="md-icon-button launch">
-                    <md-icon md-svg-icon="material-icons/ic_edit_24px.svg"></md-icon>
+                    <md-icon md-svg-icon="/auth-rest/assets/material-icons/ic_edit_24px.svg"></md-icon>
                     <md-tooltip md-direction="left">Edit product</md-tooltip>
                 </md-button>
             </div>

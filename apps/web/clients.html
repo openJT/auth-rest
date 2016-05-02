@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-<base href="/dashboard">
+<base href="/auth-rest/clients">
 
 <head>
     <meta charset="UTF-8">
     <title>Clients</title>
-    <link rel="stylesheet" href="material-design-lite/material.min.css">
-    <link rel="stylesheet" type="text/css" href="dialog-polyfill/dialog-polyfill.css" />
-    <link rel="stylesheet" href="/css/animate.css">
-    <link rel="stylesheet" href="/web/css/app.css">
+    <link rel="stylesheet" href="/auth-rest/material-design-lite/material.min.css">
+    <link rel="stylesheet" type="text/css" href="/auth-rest/dialog-polyfill/dialog-polyfill.css" />
+    <link rel="stylesheet" href="/auth-rest/css/animate.css">
+    <link rel="stylesheet" href="/auth-rest/web/css/app.css">
 </head>
 
 <body onload="clients.getData()">
@@ -21,7 +21,7 @@
         <div mdl class="hideLarge" style="margin:auto 20px auto 20px">
             <!-- Left aligned menu below button -->
             <button id="demo-menu-lower-left" class="mdl-button mdl-js-button mdl-button--icon">
-                <img src="/material-icons/ic_more_vert_white_24px.svg" />
+                <img src="/auth-rest/assets/material-icons/ic_more_vert_white_24px.svg" />
             </button>
 
             <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="demo-menu-lower-left">
@@ -29,10 +29,10 @@
                 <li class="mdl-menu__item mdl-menu__item--full-bleed-divider" onclick="clients.logout()">Exit</li>
             </ul>
         </div>
-        <a href="/clients" class="active"><h6 style="margin:25px;color:white">Clients</h6></a>
-        <a href="/products" style="text-decoration:none;margin-right:20px"><h6 style="margin:25px;color:white">Products</h6></a>
+        <a href="/auth-rest/clients" class="active"><h6 style="margin:25px;color:white">Clients</h6></a>
+        <a href="/auth-rest/products" style="text-decoration:none;margin-right:20px"><h6 style="margin:25px;color:white">Products</h6></a>
         <div id="exit" onclick="clients.logout()" style="margin: auto 30px auto auto;cursor: pointer" class="hideSmall">
-            <img src="/material-icons/ic_exit_to_app_white_24px.svg" alt="sorry no pic for you!" />
+            <img src="/auth-rest/assets/material-icons/ic_exit_to_app_white_24px.svg" alt="sorry no pic for you!" />
         </div>
         <div class="mdl-tooltip mdl-tooltip--left" for="exit">
             Exit
@@ -41,7 +41,7 @@
     <div class="flex row jEnd">
         <div style="margin:10px">
             <button id="reset" onclick="clients.reset()" class="mdl-button mdl-js-button mdl-button--fab" style="background-color:red">
-                <img src="/material-icons/ic_refresh_white_24px.svg" alt="sorry no pic for you!" />
+                <img src="/auth-rest/assets/material-icons/ic_refresh_white_24px.svg" alt="sorry no pic for you!" />
             </button>
             <div class="mdl-tooltip mdl-tooltip--left" for="reset">
                 Reset data
@@ -54,7 +54,7 @@
                 <div style="padding:10px">Client management</div>
                 <div>
                     <button id="addClient" onclick="clients.addClientDialog()" class="mdl-button mdl-js-button mdl-button--icon" onclick="products.addProductDialog()">
-                        <img src="/material-icons/ic_add_24px.svg" alt="sorry no pic for you!" />
+                        <img src="/auth-rest/assets/material-icons/ic_add_24px.svg" alt="sorry no pic for you!" />
                     </button>
                     <div class="mdl-tooltip mdl-tooltip--left" for="addClient">
                         Add product
@@ -138,12 +138,12 @@
             </div>
         </dialog>
     </div>
-    <script src="socket.io/socket.io.js"></script>
-    <script src="/web/js/clients.js"></script>
-    <script src="/web/js/draw.js"></script>
-    <script src="/web/js/rest.js"></script>
-    <script src="/web/js/auth.js"></script>
-    <script src="material-design-lite/material.min.js"></script>
+    <script src="/auth-rest/socket.io/socket.io.js"></script>
+    <script src="/auth-rest/web/js/clients.js"></script>
+    <script src="/auth-rest/web/js/draw.js"></script>
+    <script src="/auth-rest/web/js/rest.js"></script>
+    <script src="/auth-rest/web/js/auth.js"></script>
+    <script src="/auth-rest/material-design-lite/material.min.js"></script>
     <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

@@ -2,7 +2,7 @@ var products = (function (Global) {
     'use strict';
     var products, productDetail = {};
     var dialog = document.querySelector('#productDialog');
-    var socket = io('/admin', { 'query': 'token=' + window.localStorage.getItem("token") });
+    var socket = io('/admin', { 'query': 'token=' + window.localStorage.getItem("token"), path: '/auth-rest/socket.io' });
     var snackbarContainer = document.querySelector('#toast');
 
     socket.on('addProduct', function (product) {
@@ -32,7 +32,7 @@ var products = (function (Global) {
     socket.on('reset', function (product) {
         console.log('reset in products');
         var http = new XMLHttpRequest();
-        var url = "/product";
+        var url = "/auth-rest/product";
         http.open("GET", url, true);
         var token = 'Bearer ' + window.localStorage.getItem("token");
         http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -46,7 +46,7 @@ var products = (function (Global) {
             }
             else if (http.readyState == 4 && http.status == 401) {
                 window.localStorage.removeItem("token");
-                window.location.assign('/web');
+                window.location.assign('/auth-rest/web');
             }
         }
         http.send();
@@ -70,7 +70,7 @@ var products = (function (Global) {
     }
     function getData() {
         var http = new XMLHttpRequest();
-        var url = "/product";
+        var url = "/auth-rest/product";
         http.open("GET", url, true);
         var token = 'Bearer ' + window.localStorage.getItem("token");
         http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -83,7 +83,7 @@ var products = (function (Global) {
             }
             else if (http.readyState == 4 && http.status == 401) {
                 window.localStorage.removeItem("token");
-                window.location.assign('/web');
+                window.location.assign('/auth-rest/web');
             }
         }
         http.send();

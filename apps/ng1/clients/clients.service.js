@@ -42,7 +42,7 @@
             });
         });
         socket.on('reset', function (client) {
-            $http({ url: '/client', method: 'GET' })
+            $http({ url: '/auth-rest/client', method: 'GET' })
                 .success(function (data) {
                     clients = data;
                     showSimpleToast("Data reset!");
@@ -55,22 +55,22 @@
                 return clients;
             },
             updateClient: function (item) {
-                $http({ url: '/client', method: 'PUT', data: item })
+                $http({ url: '/auth-rest/client', method: 'PUT', data: item })
                     .success(function (data) { })
                     .error(function (data, status, headers, config) { });
             },
             saveClient: function (item) {
-                $http({ url: '/client', method: 'POST', data: item })
+                $http({ url: '/auth-rest/client', method: 'POST', data: item })
                     .success(function (data) { })
                     .error(function (data, status, headers, config) { });
             },
             deleteClient: function (item) {
-                $http({ url: '/client/' + item._id, method: 'DELETE' })
+                $http({ url: '/auth-rest/client/' + item._id, method: 'DELETE' })
                     .success(function () { })
                     .error(function (data, status, headers, config) { });
             },
             resetData: function () {
-                $http({ url: '/reset', method: 'GET' })
+                $http({ url: '/auth-rest/reset', method: 'GET' })
                     .success(function () { })
                     .error(function (data, status, headers, config) { });
             },

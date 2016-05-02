@@ -16,7 +16,7 @@
             login: function (user) {
                 var deferred = $q.defer();
 
-                $http.post('/auth/local', {
+                $http.post('/auth-rest/auth/local', {
                     email: user.email,
                     password: user.password
                 }).success(function (data) {
@@ -57,7 +57,7 @@
             logout: function () {
                 window.localStorage.removeItem("token");
                 currentUser = {};
-                if ($location.url() !== '/ng1/') window.location.assign('/');
+                if ($location.url() !== '/auth-rest/ng1/') window.location.assign('/');
             }
         };
     };

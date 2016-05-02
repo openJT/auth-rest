@@ -1,5 +1,4 @@
-
-var auth = (function() {
+var auth = (function () {
     'use strict';
     var message;
     return {
@@ -7,14 +6,14 @@ var auth = (function() {
     }
     function auth() {
         var http = new XMLHttpRequest();
-        var url = "/auth/local";
+        var url = "/auth-rest/auth/local";
         http.open("POST", url, true);
         http.setRequestHeader("Content-type", "application/json");
         http.setRequestHeader("Accept", "application/json");
-        http.onreadystatechange = function() {
+        http.onreadystatechange = function () {
             if (http.readyState == 4 && http.status == 200) {
                 window.localStorage.setItem('token', JSON.parse(http.responseText).token);
-                window.location.assign('/clients')
+                window.location.assign('/auth-rest/clients')
             }
             else if (http.readyState == 4 && http.status == 401) {
                 window.localStorage.removeItem("token");

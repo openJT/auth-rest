@@ -4,7 +4,7 @@
         .module('app')
         .factory('User', User);
     function User($resource) {
-        return $resource('/api/users/:id/:controller', {
+        return $resource('/auth-rest/api/users/:id/:controller', {
             id: '@_id'
         },
             {

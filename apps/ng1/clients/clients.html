@@ -1,7 +1,7 @@
 <div layout="column">
     <div layout="row" layout-align="end">
         <md-button class="md-fab md-warn" ng-click="ctrl.reset()">
-            <md-icon md-svg-icon="material-icons/ic_refresh_48px.svg" aria-label="Add client">
+            <md-icon md-svg-icon="/auth-rest/assets/material-icons/ic_refresh_48px.svg" aria-label="Add client">
                 <md-tooltip md-direction="left">Reset data</md-tooltip>
             </md-icon>
         </md-button>
@@ -10,7 +10,7 @@
         <div layout="row" layout-align="space-between center">
             <div style="margin:10px">Client management</div>
             <md-button ng-click="ctrl.addClient($event)" class="md-icon-button launch">
-                <md-icon md-svg-icon="material-icons/ic_add_48px.svg"></md-icon>
+                <md-icon md-svg-icon="/auth-rest/assets/material-icons/ic_add_48px.svg"></md-icon>
                 <md-tooltip md-direction="left">Add a client</md-tooltip>
             </md-button>
         </div>
@@ -31,13 +31,13 @@
                 <div flex class="hideColumn">{{client.position}}</div>
                 <div flex>
                     <md-button class="md-icon-button" aria-label="Edit client" ng-click="ctrl.editClient($event,client)">
-                        <md-icon md-svg-icon="material-icons/ic_edit_24px.svg"></md-icon>
+                        <md-icon md-svg-icon="/auth-rest/assets/material-icons/ic_edit_24px.svg"></md-icon>
                         <md-tooltip md-direction="right">Edit client</md-tooltip>
                     </md-button>
                 </div>
                 <div flex>
                     <md-button class="md-icon-button" aria-label="Delete client" ng-click="ctrl.deleteClient(client)">
-                        <md-icon md-svg-icon="material-icons/ic_delete_48px.svg"></md-icon>
+                        <md-icon md-svg-icon="/auth-rest/assets/material-icons/ic_delete_48px.svg"></md-icon>
                         <md-tooltip md-direction="right">Delete client</md-tooltip>
                     </md-button>
                 </div>

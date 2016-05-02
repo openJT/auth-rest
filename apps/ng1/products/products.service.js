@@ -43,7 +43,7 @@
             });
         });
         socket.on('reset', function (client) {
-            $http({ url: '/product', method: 'GET' })
+            $http({ url: '/auth-rest/product', method: 'GET' })
                 .success(function (data) {
                     products = data;
                 })
@@ -61,29 +61,29 @@
                 details = {};
             },
             updateProduct: function (item) {
-                $http({ url: '/product', method: 'PUT', data: item })
+                $http({ url: '/auth-rest/product', method: 'PUT', data: item })
                     .success(function (data) { })
                     .error(function (data, status, headers, config) { });
             },
             addProduct: function (item) {
-                $http({ url: '/product', method: 'POST', data: item })
+                $http({ url: '/auth-rest/product', method: 'POST', data: item })
                     .success(function (data) { })
                     .error(function (data, status, headers, config) { });
             },
             deleteProduct: function (id) {
-                $http({ url: '/product/' + id, method: 'DELETE' })
+                $http({ url: '/auth-rest/product/' + id, method: 'DELETE' })
                     .success(function () { })
                     .error(function (data, status, headers, config) { });
             },
             getProductDetails: function (id) {
-                $http({ url: '/product/' + id, method: 'GET' })
+                $http({ url: '/auth-rest/product/' + id, method: 'GET' })
                     .success(function (data) {
                         details = data;
                     })
                     .error(function (data, status, headers, config) { });
             },
             resetData: function () {
-                $http({ url: '/reset', method: 'GET' })
+                $http({ url: '/auth-rest/reset', method: 'GET' })
                     .success(function () { })
                     .error(function (data, status, headers, config) { });
             }
